@@ -1,6 +1,6 @@
 import React, { FormEvent } from 'react';
 
-export type FormData = {
+export type InputFormData = {
   date: string;
   litres: number;
   miles: number;
@@ -8,12 +8,12 @@ export type FormData = {
   cost: number;
 };
 
-export type FormProps = {
-  value: FormData,
+export type InputFormProps = {
+  value: InputFormData,
   onInputChange: (data: { input: string; value: any }) => void
 };
 
-export default function Form({ value, onInputChange }: FormProps) {
+export function InputForm({ value, onInputChange }: InputFormProps) {
   // Input change handler
   const handleInputChange = (e: FormEvent) => {
     e.preventDefault();
