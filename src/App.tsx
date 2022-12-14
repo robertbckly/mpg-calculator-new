@@ -46,7 +46,7 @@ export default function App() {
       {recordList && recordList.map((r) => (
         <div>
           <p>{`[${r.date}] ${r.litres}L @ ${r.location} (£${r.cost}): ${r.miles}mi`}</p>
-          <p>{`= £${(r.cost / r.litres).toFixed(2)}/L`}</p>
+          <p>{`= £${(r.cost / r.litres).toFixed(3)}/L`}</p>
           <p>{`= ${(r.miles / (r.litres / UK_GALLON_LITRES)).toFixed(2)}mpg`}</p>
           <p>{`= £${(r.cost / r.miles).toFixed(2)}/mi`}</p>
         </div>
