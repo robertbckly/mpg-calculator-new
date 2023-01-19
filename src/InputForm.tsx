@@ -1,6 +1,9 @@
 import React, { FormEvent } from 'react';
 
+// Not sure this type should be here... probably move to App
+// and it shouldn't represent the form data... it should represent the 'record' object
 export type InputFormData = {
+  id: string,
   date: string;
   litres: number;
   miles: number;
