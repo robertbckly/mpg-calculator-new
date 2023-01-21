@@ -1,22 +1,12 @@
 import React, { FormEvent } from 'react';
+import { Record } from '../types/record';
 
-// Not sure this type should be here... probably move to App
-// and it shouldn't represent the form data... it should represent the 'record' object
-export type InputFormData = {
-  id: string,
-  date: string;
-  litres: number;
-  miles: number;
-  location: string;
-  cost: number;
-};
-
-export type InputFormProps = {
-  value: InputFormData,
+export type RecordFormProps = {
+  value: Record,
   onInputChange: (data: { input: string; value: any }) => void
 };
 
-export function InputForm({ value, onInputChange }: InputFormProps) {
+export function RecordForm({ value, onInputChange }: RecordFormProps) {
   // Input change handler
   const handleInputChange = (e: FormEvent) => {
     e.preventDefault();

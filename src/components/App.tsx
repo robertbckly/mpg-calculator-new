@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
-import { InputForm, InputFormData } from './InputForm';
+import { Record } from '../types/record';
+import { RecordForm } from './RecordForm';
 
+const STORAGE_OBJECT_NAME = 'recordList';
 const UK_GALLON_LITRES = 4.5461;
 const MS_TIMEZONE_DIFF = new Date().getTimezoneOffset() * 60 * 1000;
-const INIT_INPUT_DATA: InputFormData = {
+const INIT_INPUT_DATA: Record = {
   // Get YYYY-MM-DD substring from ISO date string
   // ...accounting for timezone difference,
   // ...because `toISOString()` converts to UTC time.
@@ -17,10 +19,19 @@ const INIT_INPUT_DATA: InputFormData = {
 };
 
 export default function App() {
-  // Input data
-  const [inputData, setInputData] = useState<InputFormData>(INIT_INPUT_DATA);
-  // Saved records
-  const [recordList, setRecordList] = useState<InputFormData[]>([]);
+  const [inputData, setInputData] = useState<Record>(INIT_INPUT_DATA);
+  const [recordList, setRecordList] = useState<Record[]>([]);
+
+  useEffect(() => {
+    // Sync state with storage
+    if (!recordList.length) {
+      const storedRecords = JSON.parse(window.localStorage.getItem(STORAGE_OBJECT_NAME));
+      if (storedRecords) setRecordList(storedRecords);
+      return;
+    }
+    // Sync storage with state
+    window.localStorage.setItem(STORAGE_OBJECT_NAME, JSON.stringify(recordList));
+  }, [recordList]);
 
   const handleInputChange = (data: { input: string; value: any }) => {
     setInputData((oldData) => ({
@@ -56,7 +67,7 @@ export default function App() {
 
   return (
     <>
-      <InputForm value={inputData} onInputChange={handleInputChange} />
+      <RecordForm value={inputData} onInputChange={handleInputChange} />
       <button type="button" onClick={handleSave}>Save</button>
       {recordListElements}
     </>
