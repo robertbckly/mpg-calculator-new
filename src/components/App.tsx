@@ -23,13 +23,13 @@ export default function App() {
   const [recordList, setRecordList] = useState<Record[]>([]);
 
   useEffect(() => {
-    // Sync state with storage
-    if (!recordList.length) {
+    // No state; so sync state with storage
+    if (!recordList?.length) {
       const storedRecords = JSON.parse(window.localStorage.getItem(STORAGE_OBJECT_NAME));
-      if (storedRecords) setRecordList(storedRecords);
+      if (storedRecords?.length) setRecordList(storedRecords);
       return;
     }
-    // Sync storage with state
+    // State updated; so sync storage with state
     window.localStorage.setItem(STORAGE_OBJECT_NAME, JSON.stringify(recordList));
   }, [recordList]);
 

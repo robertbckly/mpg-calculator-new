@@ -7,14 +7,13 @@ export type RecordFormProps = {
 };
 
 export function RecordForm({ value, onInputChange }: RecordFormProps) {
-  // Input change handler
   const handleInputChange = (e: FormEvent) => {
     e.preventDefault();
     const input = e.target as HTMLInputElement;
     onInputChange({ input: input.name, value: input.value });
   };
 
-  // Ensure that each <input> `type` attr. follows respective `FormData` type
+  // Note: ensure each <input> `type` follows respective `FormData` type
   return (
     <>
       <h1>Fuel Calculator</h1>
