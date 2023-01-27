@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { Record } from '../types/record';
-import { RecordForm } from './RecordForm';
+import { DataForm } from './DataForm';
 
 const STORAGE_OBJECT_NAME = 'recordList';
 const UK_GALLON_LITRES = 4.5461;
@@ -21,6 +21,7 @@ const INIT_INPUT_DATA: Record = {
 export default function App() {
   const [inputData, setInputData] = useState<Record>(INIT_INPUT_DATA);
   const [recordList, setRecordList] = useState<Record[]>([]);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     // No state; so sync state with storage
@@ -40,7 +41,7 @@ export default function App() {
     }));
   };
 
-  const handleSave = () => {
+  const saveRecord = () => {
     // Save input
     setRecordList((exRecordList) => {
       const newRecordList = exRecordList ? [...exRecordList] : [];
@@ -49,6 +50,12 @@ export default function App() {
     });
     // Reset input
     setInputData(INIT_INPUT_DATA);
+    setSaving(false);
+  };
+
+  const handleSave = () => {
+    if (!saving) setSaving(true);
+    else saveRecord();
   };
 
   const recordListElements = recordList?.map((r) => {
@@ -67,8 +74,20 @@ export default function App() {
 
   return (
     <>
-      <RecordForm value={inputData} onInputChange={handleInputChange} />
-      <button type="button" onClick={handleSave}>Save</button>
+      <h1>Fuel Calculator</h1>
+
+      <DataForm value={inputData} showFull={saving} onInputChange={handleInputChange} />
+
+      <button type="button" onClick={handleSave}>
+        {saving ? 'Done' : 'Save'}
+      </button>
+
+      {saving && (
+      <button type="button" onClick={() => { setSaving(false); }}>
+        Cancel
+      </button>
+      )}
+
       {recordListElements}
     </>
   );
