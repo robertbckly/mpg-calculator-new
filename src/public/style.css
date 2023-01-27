@@ -7,14 +7,25 @@ input {
   font-size: 1rem;
 }
 
-.input-form {
+.record-form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  padding: 1rem;
 
   background-color: lightblue;
 }
 
-.input-form > * {
+.record-form > * {
   margin: 1rem;
+}
+
+.record {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.record:hover {
+  background-color: rgba(0, 0, 0, 0.05);
 }

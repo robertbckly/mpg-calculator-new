@@ -5,16 +5,6 @@ import { Record } from '../types/record';
 
 *** TODO ***
 
-This is the simple form, containing the minimum inputs to do calculations:
-- litres
-- miles
-- cost
-
-Next: create another form, visible upon clicking 'save' that takes the entered
-data and add a couple more fields: location and date.
-
-Then the record will be saved in storage.
-
 Add editing using this second form.
 Add deleting.
 
@@ -37,10 +27,9 @@ export function DataForm({ value, showFull, onInputChange }: DataFormProps) {
     onInputChange({ input: input.name, value: input.value });
   };
 
-  // Note: ensure each <input> `type` follows respective `FormData` type
   return (
     <form
-      className="input-form"
+      className="record-form"
       onSubmit={(e) => e.preventDefault()}
     >
       {/* Litres */}
@@ -116,7 +105,6 @@ export function DataForm({ value, showFull, onInputChange }: DataFormProps) {
       </>
       )}
     </form>
-
   );
 }
 
