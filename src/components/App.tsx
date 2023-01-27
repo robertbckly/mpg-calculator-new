@@ -4,6 +4,14 @@ import Record from './Record';
 import { DataForm } from './RecordForm';
 import { Record as RecordT } from '../types/record';
 
+/*
+  TODO:
+    - editing
+    - form validation
+    - aesthetics & polish
+    - build & deploy
+*/
+
 const STORAGE_OBJECT_NAME = 'recordList';
 const MS_TIMEZONE_DIFF = new Date().getTimezoneOffset() * 60 * 1000;
 const INIT_INPUT_DATA: RecordT = {
@@ -26,7 +34,7 @@ export default function App() {
 
   useEffect(() => {
     // No state; so sync state with storage
-    if (!synced && !recordList?.length) {
+    if (!synced) {
       const storedRecords = JSON.parse(window.localStorage.getItem(STORAGE_OBJECT_NAME));
       if (storedRecords?.length) setRecordList(storedRecords);
       setSynced(true);

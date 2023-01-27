@@ -1,19 +1,6 @@
 import React, { FormEvent } from 'react';
 import { Record } from '../types/record';
 
-/*
-
-*** TODO ***
-
-Add editing using this second form.
-Add deleting.
-
-Make it look nice.
-
-Ship.
-
-*/
-
 export type DataFormProps = {
   value: Record;
   showFull?: boolean;
