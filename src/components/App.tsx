@@ -50,8 +50,20 @@ export default function App() {
     }));
   };
 
-  const resetInput = () => {
-    setInputData(INIT_INPUT_DATA);
+  /**
+   * Resets input form. Only clears input data if a record with ID is already saved
+   * (to prevent data loss).
+   *
+   * Deleting a record will clear input data because the record will still be saved
+   * at the time of calling `resetInput()`.
+   *
+   * @param force force input data to be cleared
+   */
+  const resetInput = (force = false) => {
+    const recordIsSaved = recordList.findIndex((record) => record.id === inputData.id) >= 0;
+    if (recordIsSaved || force) {
+      setInputData(INIT_INPUT_DATA);
+    }
     setSavingOpen(false);
   };
 
@@ -70,11 +82,11 @@ export default function App() {
       setRecordList((exRecordList) => [...exRecordList, { ...inputData, id: uuid() }]);
     }
 
-    resetInput();
+    resetInput(true);
   };
 
   /**
-   * `handleSave` serves two purposes due to the save button's dual behaviour:
+   * Handles save button's dual behaviour:
    * - first click: expand form (via `savingOpen`)
    * - second click: finally save all details
    */
@@ -90,7 +102,7 @@ export default function App() {
 
   const handleDelete = (id: string) => {
     setRecordList((list) => list.filter((record) => record.id !== id));
-    if (inputData.id === id) resetInput();
+    resetInput();
   };
 
   return (
@@ -104,7 +116,7 @@ export default function App() {
       </button>
 
       {savingOpen && (
-      <button type="button" onClick={() => { setSavingOpen(false); }}>
+      <button type="button" onClick={() => { resetInput(); }}>
         Cancel
       </button>
       )}
