@@ -6,7 +6,6 @@ import { Record as RecordT } from '../types/record';
 
 /*
   TODO:
-    - editing
     - form validation
     - aesthetics & polish
     - build & deploy
@@ -51,25 +50,47 @@ export default function App() {
     }));
   };
 
-  const saveRecord = () => {
-    // Save input
-    setRecordList((exRecordList) => {
-      const newRecordList = exRecordList ? [...exRecordList] : [];
-      newRecordList.push({ ...inputData, id: uuid() });
-      return newRecordList;
-    });
-    // Reset input
+  const resetInput = () => {
     setInputData(INIT_INPUT_DATA);
     setSavingOpen(false);
   };
 
+  const saveRecord = () => {
+    const { id } = inputData;
+    if (id) {
+      // Update existing Record
+      setRecordList((list) => {
+        const newList = [...list];
+        const indexToReplace = newList.findIndex((record) => record.id === id);
+        newList[indexToReplace] = { ...inputData, id };
+        return newList;
+      });
+    } else {
+      // Create new Record
+      setRecordList((exRecordList) => [...exRecordList, { ...inputData, id: uuid() }]);
+    }
+
+    resetInput();
+  };
+
+  /**
+   * `handleSave` serves two purposes due to the save button's dual behaviour:
+   * - first click: expand form (via `savingOpen`)
+   * - second click: finally save all details
+   */
   const handleSave = () => {
     if (!savingOpen) setSavingOpen(true);
     else saveRecord();
   };
 
+  const handleEdit = (id: string) => {
+    setInputData(recordList.filter((record) => record.id === id)[0]);
+    setSavingOpen(true);
+  };
+
   const handleDelete = (id: string) => {
     setRecordList((list) => list.filter((record) => record.id !== id));
+    if (inputData.id === id) resetInput();
   };
 
   return (
@@ -97,6 +118,7 @@ export default function App() {
           miles={r.miles}
           location={r.location}
           cost={r.cost}
+          onEdit={handleEdit}
           onDelete={handleDelete}
         />
       ))}
