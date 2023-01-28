@@ -30,7 +30,7 @@ export default function App() {
   const [inputData, setInputData] = useState<RecordT>(INIT_INPUT_DATA);
   const [recordList, setRecordList] = useState<RecordT[]>([]);
   const [synced, setSynced] = useState(false);
-  const [saving, setSaving] = useState(false);
+  const [savingOpen, setSavingOpen] = useState(false);
 
   useEffect(() => {
     // No state; so sync state with storage
@@ -60,11 +60,11 @@ export default function App() {
     });
     // Reset input
     setInputData(INIT_INPUT_DATA);
-    setSaving(false);
+    setSavingOpen(false);
   };
 
   const handleSave = () => {
-    if (!saving) setSaving(true);
+    if (!savingOpen) setSavingOpen(true);
     else saveRecord();
   };
 
@@ -76,14 +76,14 @@ export default function App() {
     <>
       <h1>Fuel Calculator</h1>
 
-      <DataForm value={inputData} showFull={saving} onInputChange={handleInputChange} />
+      <DataForm value={inputData} showFull={savingOpen} onInputChange={handleInputChange} />
 
       <button type="button" onClick={handleSave}>
-        {saving ? 'Done' : 'Save'}
+        {savingOpen ? 'Done' : 'Save'}
       </button>
 
-      {saving && (
-      <button type="button" onClick={() => { setSaving(false); }}>
+      {savingOpen && (
+      <button type="button" onClick={() => { setSavingOpen(false); }}>
         Cancel
       </button>
       )}
