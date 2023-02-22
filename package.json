@@ -1,7 +1,6 @@
 {
   "name": "fuel-calculator",
   "version": "1.0.0",
-  "main": "index.js",
   "repository": "git@github.com:robertbckly/fuel-calculator.git",
   "author": "Robert Buckley <robqhd@gmail.com>",
   "license": "",

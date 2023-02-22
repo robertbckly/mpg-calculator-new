@@ -6,7 +6,7 @@ import { Record as RecordT } from '../types/record';
 
 /*
   TODO:
-    - form validation
+    - HTML / browser API form validation
     - aesthetics & polish
     - build & deploy
 */
@@ -18,6 +18,7 @@ const INIT_INPUT_DATA: RecordT = {
   // ...accounting for timezone difference,
   // ...because `toISOString()` converts to UTC time.
   id: null,
+  // TODO: this will only be calculated once, leading to possibly incorrect `date` at runtime!
   date: new Date(Date.now() + MS_TIMEZONE_DIFF).toISOString().substring(0, 10),
   litres: 0,
   miles: 0,
@@ -43,27 +44,18 @@ export default function App() {
     window.localStorage.setItem(STORAGE_OBJECT_NAME, JSON.stringify(recordList));
   }, [recordList, synced]);
 
-  const handleInputChange = (data: { input: string; value: any }) => {
-    setInputData((oldData) => ({
-      ...oldData,
-      [data.input]: data.value,
-    }));
-  };
-
   /**
    * Resets input form. Only clears input data if a record with ID is already saved
    * (to prevent data loss).
    *
-   * Deleting a record will clear input data because the record will still be saved
-   * at the time of calling `resetInput()`.
+   * Deleting a record will clear input data because the `recordList` state value will
+   * still contain the record object at the time of calling `resetInput()`.
    *
    * @param force force input data to be cleared
    */
   const resetInput = (force = false) => {
     const recordIsSaved = recordList.findIndex((record) => record.id === inputData.id) >= 0;
-    if (recordIsSaved || force) {
-      setInputData(INIT_INPUT_DATA);
-    }
+    if (recordIsSaved || force) setInputData(INIT_INPUT_DATA);
     setSavingOpen(false);
   };
 
@@ -83,6 +75,13 @@ export default function App() {
     }
 
     resetInput(true);
+  };
+
+  const handleInputChange = (data: { input: string; value: any }) => {
+    setInputData((oldData) => ({
+      ...oldData,
+      [data.input]: data.value,
+    }));
   };
 
   /**
@@ -112,13 +111,13 @@ export default function App() {
       <DataForm value={inputData} showFull={savingOpen} onInputChange={handleInputChange} />
 
       <button type="button" onClick={handleSave}>
-        {savingOpen ? 'Done' : 'Save'}
+        {!savingOpen ? 'Save' : 'Done'}
       </button>
 
       {savingOpen && (
-      <button type="button" onClick={() => { resetInput(); }}>
-        Cancel
-      </button>
+        <button type="button" onClick={() => { resetInput(); }}>
+          Cancel
+        </button>
       )}
 
       {recordList?.map((r) => (
