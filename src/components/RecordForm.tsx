@@ -1,5 +1,11 @@
-import React, { FormEvent } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { Record } from '../types/record';
+
+// I got this working! Mapping a union into an object
+type InputFields = 'litres' | 'miles' | 'cost';
+type InputErrors = {
+  [field in InputFields]?: boolean;
+};
 
 export type DataFormProps = {
   value: Record;
@@ -8,10 +14,13 @@ export type DataFormProps = {
 };
 
 export function DataForm({ value, showFull, onInputChange }: DataFormProps) {
-  const handleInputChange = (e: FormEvent) => {
-    e.preventDefault();
-    const input = e.target as HTMLInputElement;
+  const [errors, setErrors] = useState<InputErrors>({});
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const input = e.target;
+    const isValid = input.checkValidity();
     onInputChange({ input: input.name, value: input.value });
+    setErrors((currentErrors) => ({ ...currentErrors, [e.target.name]: !isValid }));
   };
 
   return (
@@ -21,7 +30,10 @@ export function DataForm({ value, showFull, onInputChange }: DataFormProps) {
     >
       {/* Litres */}
       <label htmlFor="litres">
-        <span>Litres</span>
+        <span>
+          Litres
+          {errors.litres ? '! ' : undefined}
+        </span>
         <input
           type="number"
           name="litres"
@@ -35,7 +47,10 @@ export function DataForm({ value, showFull, onInputChange }: DataFormProps) {
 
       {/* Miles */}
       <label htmlFor="miles">
-        <span>Miles</span>
+        <span>
+          Miles
+          {errors.miles ? '! ' : undefined}
+        </span>
         <input
           type="number"
           name="miles"
@@ -49,7 +64,10 @@ export function DataForm({ value, showFull, onInputChange }: DataFormProps) {
 
       {/* Cost */}
       <label htmlFor="cost">
-        <span>£</span>
+        <span>
+          £
+          {errors.cost ? '! ' : undefined}
+        </span>
         <input
           type="number"
           name="cost"
@@ -63,34 +81,34 @@ export function DataForm({ value, showFull, onInputChange }: DataFormProps) {
 
       {/* Extra inputs for full form */}
       {showFull
-      && (
-      <>
-        {/* Date */}
-        <label htmlFor="date">
-          <span>Date</span>
-          <input
-            type="date"
-            name="date"
-            id="date"
-            value={value.date}
-            onChange={handleInputChange}
-          />
-        </label>
+        && (
+          <>
+            {/* Date */}
+            <label htmlFor="date">
+              <span>Date</span>
+              <input
+                type="date"
+                name="date"
+                id="date"
+                value={value.date}
+                onChange={handleInputChange}
+              />
+            </label>
 
-        {/* Location */}
-        <label htmlFor="location">
-          <span>Location</span>
-          <input
-            type="text"
-            name="location"
-            id="location"
-            placeholder="Where did you fill up?"
-            value={value.location}
-            onChange={handleInputChange}
-          />
-        </label>
-      </>
-      )}
+            {/* Location */}
+            <label htmlFor="location">
+              <span>Location</span>
+              <input
+                type="text"
+                name="location"
+                id="location"
+                placeholder="Where did you fill up?"
+                value={value.location}
+                onChange={handleInputChange}
+              />
+            </label>
+          </>
+        )}
     </form>
   );
 }

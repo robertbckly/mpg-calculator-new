@@ -22,11 +22,10 @@ export default function Record({
 
   return (
     <div className="record">
+      <p style={{ fontSize: '0.8rem', fontWeight: 'bold' }}>{`${date} @ ${location}`}</p>
+      <p style={{ fontWeight: 'bold' }}>{`${output.litres}L / £${output.cost} / ${output.miles}mi`}</p>
       <p style={{ fontWeight: 'bold' }}>
-        {`${date} ... ${location} ... ${output.litres}L ... £${output.cost} ... ${output.miles}mi`}
-      </p>
-      <p>
-        {`= £${output.costPerLitre}/L ... £${output.costPerMile}/mi ... ${output.milesPerGallon}mpg`}
+        {`£${output.costPerLitre}/L / £${output.costPerMile}/mi / ${output.milesPerGallon}mpg`}
       </p>
       <button type="button" onClick={() => onEdit(id)}>Edit</button>
       <button type="button" onClick={() => onDelete(id)}>Delete</button>
