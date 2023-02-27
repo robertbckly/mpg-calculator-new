@@ -1,8 +1,7 @@
 export type Record = {
-  id: string;
-  date: string;
-  litres: number;
-  miles: number;
-  location: string;
-  cost: number;
+  id: string | null;
+  volume: number | null;
+  distance: number | null;
+  cost: number | null;
+  description: string | null;
 };

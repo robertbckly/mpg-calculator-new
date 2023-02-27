@@ -1,40 +1,95 @@
-body {
+* {
   box-sizing: border-box;
   font-family: sans-serif;
-
-  display: flex;
-  justify-content: center;
 }
 
-body > div {
-  margin-top: 1rem;
-  padding: 1rem;
-  border: 1px solid rgb(186, 215, 224);
-  border-radius: 1rem;
-  background-color: rgb(233, 249, 255);
+body {
+  margin: 0;
 }
 
 input {
   font-size: 1rem;
 }
 
-.record-form {
+#root {
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper {
+  flex: 1;
+  max-width: 35rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  margin: 1rem;
+  background-color: rgb(30, 30, 30);
+  color: white;
+}
+
+.calculator {
+  display: flex;
+  gap: 2rem;
+  padding: 0.5rem;
+}
+
+.calculator__input-form {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 1rem;
+  gap: 0.8em;
 }
 
-.record-form > * {
-  margin: 1rem;
+.calculator__input-form label {
+  font-size: 0.85rem;
+  line-height: 175%;
+  color: rgba(255, 255, 255, 0.65);
 }
 
-.record {
-  padding: 1rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  transition: background-color 0.2s ease-in-out;
+.calculator__input-form input {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+  background-color: black;
+  color: white;
 }
 
-.record:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+.calculator__output {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem auto;
+  font-weight: bold;
+  text-align: center;
+}
+
+.calculator__wrappable {
+  overflow-wrap: anywhere;
+}
+
+.calculator__output p:nth-child(1) {
+  font-size: 3rem;
+  margin: 0;
+  line-height: 100%;
+}
+
+.calculator__output p:nth-child(2) {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+@media screen and (max-width: 410px) {
+  .calculator {
+    flex-direction: column-reverse;
+    gap: 1rem;
+  }
+
+  .calculator__output {
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
 }
