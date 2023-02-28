@@ -92,25 +92,21 @@ export default function App() {
   // };
 
   return (
-    <main className="wrapper">
-      <div className="calculator">
-        <InputForm
-          value={inputData}
-          onChange={({ input, value }) => setInputData({
-            ...inputData,
-            [input]: value,
-          })}
-        />
-        <div className="calculator__output">
-          <p>
-            <span className="calculator__wrappable">
-              0.00
-            </span>
-            mpg
-          </p>
-          <p>£00.00/mi</p>
-        </div>
+    <div className="calculator">
+      <InputForm
+        value={inputData}
+        onChange={({ input, value }) => setInputData({
+          ...inputData,
+          [input]: value,
+        })}
+      />
+      <div className="calculator__output">
+        <p className="calculator__output-item calculator__output-item--large">
+          <span className="wrappable-text">777.77</span>
+          mpg
+        </p>
+        <p className="calculator__output-item">£0/mi</p>
       </div>
-    </main>
+    </div>
   );
 }
