@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
 // import { v4 as uuid } from 'uuid';
 // import Record from './Record';
-import { InputForm } from './InputForm';
+import React, { useState } from 'react';
+import { MainForm } from './main-form/main-form';
 import { Record as RecordT } from '../types/record';
+import './app.css';
 
 // const LOCAL_STORAGE_NAME = 'recordList';
 const INIT_INPUT_DATA: RecordT = Object.freeze({
@@ -93,19 +94,19 @@ export default function App() {
 
   return (
     <div className="calculator">
-      <InputForm
+      <MainForm
         value={inputData}
         onChange={({ input, value }) => setInputData({
           ...inputData,
           [input]: value,
         })}
       />
-      <div className="calculator__output">
-        <p className="calculator__output-item calculator__output-item--large">
+      <div className="output">
+        <p className="output-item output-item--large">
           <span className="wrappable-text">777.77</span>
           mpg
         </p>
-        <p className="calculator__output-item">£0/mi</p>
+        <p className="output-item">£0/mi</p>
       </div>
     </div>
   );

@@ -5,7 +5,7 @@
   "author": "Robert Buckley <robqhd@gmail.com>",
   "license": "",
   "private": true,
-  "source": "src/public/index.html",
+  "source": "src/index.html",
   "scripts": {
     "start": "parcel",
     "build": "parcel build",

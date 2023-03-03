@@ -28,55 +28,35 @@ input {
   width: 100%;
   max-width: 35rem;
   padding: var(--spacing);
-  border-radius: 1rem;
+  border-radius: 0.65rem;
   gap: var(--spacing);
   background-color: rgb(30, 30, 30);
   color: white;
 }
 
-/* INPUT */
-.calculator__input-form {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.calculator__input-form label {
-  font-size: 0.85rem;
-  line-height: 200%;
-  color: rgba(255, 255, 255, 0.65);
-}
-
-.calculator__input-form input {
-  width: 100%;
-  padding: 0.5rem;
-  border: none;
-  border-radius: 0.5rem;
-  background-color: black;
-  color: white;
-}
-
-/* OUTPUT */
-.calculator__output {
+.output {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 1rem;
+}
+
+.output-item {
+  font-size: 1.25rem;
+  margin: 0;
   font-weight: bold;
   text-align: center;
 }
 
-.calculator__output-item {
-  font-size: 1.25rem;
-  margin: 0;
-}
-
-.calculator__output-item--large {
+.output-item--large {
   font-size: 3rem;
 }
 
+/* 
+  Consider using a pre-processor to use centrally defined breakpoints in
+  all CSS files.
+*/
 @media screen and (max-width: 410px) {
   .calculator {
     padding-top: 4rem;
