@@ -14,7 +14,7 @@
 .main-form__input {
   width: 100%;
   padding: 0.5rem;
-  border: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 0.65rem;
   background-color: black;
   color: white;

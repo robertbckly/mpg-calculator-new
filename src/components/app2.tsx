@@ -20,6 +20,14 @@ export default function App() {
   // const [synced, setSynced] = useState(false);
   // const [savingOpen, setSavingOpen] = useState(false);
 
+  const mpg = inputData.distance && inputData.volume
+    ? (inputData.distance / (inputData.volume / 4.5462)).toFixed(2)
+    : 0;
+
+  const mpp = inputData.cost && inputData.distance
+    ? (inputData.cost / inputData.distance).toFixed(2)
+    : 0;
+
   // useEffect(() => {
   //   // No state; so sync state with storage
   //   if (!synced) {
@@ -65,12 +73,12 @@ export default function App() {
   //   resetInput(true);
   // };
 
-  // const handleInputChange = (data: { input: string; value: any }) => {
-  //   setInputData((oldData) => ({
-  //     ...oldData,
-  //     [data.input]: data.value,
-  //   }));
-  // };
+  const handleInputChange = ({ input, value }: { input: string; value: any; }) => {
+    setInputData((exData) => ({
+      ...exData,
+      [input]: value,
+    }));
+  };
 
   // /**
   //  * Handles save button's dual behaviour:
@@ -96,17 +104,16 @@ export default function App() {
     <div className="calculator">
       <MainForm
         value={inputData}
-        onChange={({ input, value }) => setInputData({
-          ...inputData,
-          [input]: value,
-        })}
+        onChange={(change) => handleInputChange(change)}
       />
       <div className="output">
         <p className="output-item output-item--large">
-          <span className="wrappable-text">777.77</span>
+          <span className="wrap-text">{mpg}</span>
           mpg
         </p>
-        <p className="output-item">£0/mi</p>
+        <p className="output-item">
+          {`£${mpp}/mi`}
+        </p>
       </div>
     </div>
   );

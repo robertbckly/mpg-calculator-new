@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { Record } from '../types/record';
+import { Record } from '../../types/record';
 import './main-form.css';
 
 // type InputErrors = {
@@ -8,7 +8,7 @@ import './main-form.css';
 
 export type MainFormProps = {
   value: Record;
-  onChange: (data: { input: string; value: any }) => void;
+  onChange: (change: { input: string; value: any }) => void;
 };
 
 export function MainForm({ value, onChange }: MainFormProps) {
@@ -24,26 +24,26 @@ export function MainForm({ value, onChange }: MainFormProps) {
   return (
     <form className="main-form" onSubmit={(e) => e.preventDefault()}>
       <label htmlFor="volume" className="main-form__label">
-        Volume
+        Litres
         <input
           className="main-form__input"
           type="number"
           name="volume"
           step={0.01}
           min={0}
-          value={value.volume || undefined}
+          value={value.volume || ''}
           onChange={handleInputChange}
         />
       </label>
       <label htmlFor="distance" className="main-form__label">
-        Distance
+        Miles
         <input
           className="main-form__input"
           type="number"
           name="distance"
           step={0.01}
           min={0}
-          value={value.distance || undefined}
+          value={value.distance || ''}
           onChange={handleInputChange}
         />
       </label>
@@ -55,7 +55,7 @@ export function MainForm({ value, onChange }: MainFormProps) {
           name="cost"
           step={0.01}
           min={0}
-          value={value.cost || undefined}
+          value={value.cost || ''}
           onChange={handleInputChange}
         />
       </label>

@@ -5,13 +5,14 @@
 body {
   margin: 0;
   font-family: sans-serif;
+  background-color: black;
 }
 
 input {
   font-size: 1rem;
 }
 
-.wrappable-text {
+.wrap-text {
   overflow-wrap: anywhere;
 }
 
@@ -28,6 +29,7 @@ input {
   width: 100%;
   max-width: 35rem;
   padding: var(--spacing);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 0.65rem;
   gap: var(--spacing);
   background-color: rgb(30, 30, 30);
