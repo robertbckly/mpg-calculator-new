@@ -8,7 +8,8 @@ body {
   background-color: black;
 }
 
-input {
+input,
+button {
   font-size: 1rem;
 }
 
@@ -24,14 +25,15 @@ input {
 }
 
 .calculator {
-  --spacing: 2rem;
+  --calculator-spacing: 2rem;
   display: flex;
   width: 100%;
   max-width: 35rem;
-  padding: var(--spacing);
+  padding: var(--calculator-spacing);
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 0.65rem;
-  gap: var(--spacing);
+  gap: var(--calculator-spacing);
+  position: relative;
   background-color: rgb(30, 30, 30);
   color: white;
 }
@@ -55,13 +57,40 @@ input {
   font-size: 3rem;
 }
 
+.save-button {
+  font-size: 0.85rem;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 2rem;
+  position: absolute;
+  bottom: calc(-1.5rem);
+  left: 75%;
+  font-weight: bold;
+  line-height: 1rem;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  transform: translateX(-50%);
+}
+
+.save-button:hover {
+  background-color: gainsboro;
+}
+
 /* 
   Consider using a pre-processor to use centrally defined breakpoints in
   all CSS files.
 */
 @media screen and (max-width: 410px) {
   .calculator {
-    padding-top: 4rem;
     flex-direction: column-reverse;
+  }
+
+  .output {
+    margin-top: var(--calculator-spacing);
+  }
+
+  .save-button {
+    left: 50%;
   }
 }

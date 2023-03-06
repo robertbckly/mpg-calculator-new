@@ -8,7 +8,7 @@ import './main-form.css';
 
 export type MainFormProps = {
   value: Record;
-  onChange: (change: { input: string; value: any }) => void;
+  onChange: (input: string, value: any) => void;
 };
 
 export function MainForm({ value, onChange }: MainFormProps) {
@@ -16,7 +16,7 @@ export function MainForm({ value, onChange }: MainFormProps) {
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const input = e.target;
-    onChange({ input: input.name, value: input.value });
+    onChange(input.name, input.value);
     // const isValid = input.checkValidity();
     // setErrors((currentErrors) => ({ ...currentErrors, [e.target.name]: !isValid }));
   };
