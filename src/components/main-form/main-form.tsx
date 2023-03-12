@@ -48,7 +48,7 @@ export function MainForm({ value, onChange }: MainFormProps) {
         />
       </label>
       <label htmlFor="cost" className="main-form__label">
-        Cost
+        Cost (£)
         <input
           className="main-form__input"
           type="number"

@@ -3,7 +3,9 @@
 }
 
 body {
+  display: flex;
   margin: 0;
+  justify-content: center;
   font-family: sans-serif;
   background-color: black;
 }
@@ -18,24 +20,29 @@ button {
 }
 
 #root {
-  display: flex;
+  flex: 1;
+  max-width: 50rem;
   margin: 1rem;
-  flex-direction: column;
-  align-items: center;
 }
 
-.calculator {
-  --calculator-spacing: 2rem;
-  display: flex;
-  width: 100%;
-  max-width: 35rem;
-  padding: var(--calculator-spacing);
+.container {
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 0.65rem;
-  gap: var(--calculator-spacing);
-  position: relative;
   background-color: rgb(30, 30, 30);
   color: white;
+}
+
+.container--calculator {
+  --calculator-spacing: 2rem;
+  display: flex;
+  padding: var(--calculator-spacing);
+  gap: var(--calculator-spacing);
+  position: relative;
+}
+
+.container--records {
+  padding: 2rem;
+  margin-top: 3rem;
 }
 
 .output {
@@ -63,15 +70,17 @@ button {
   border: none;
   border-radius: 2rem;
   position: absolute;
-  bottom: calc(-1.5rem);
   /* Calc removes remaining 25% of `gap` between columns */
   left: calc(75% - calc(var(--calculator-spacing) * 0.25));
+  bottom: 0;
   font-weight: bold;
   line-height: 1rem;
   background-color: white;
   color: black;
   cursor: pointer;
-  transform: translateX(-50%);
+  /* 1px accounts for 50% of parent container's border */
+  transform: translate(-50%, calc(50% + 1px));
+  z-index: 1;
 }
 
 .save-button:hover {
@@ -83,7 +92,7 @@ button {
   all CSS files.
 */
 @media screen and (max-width: 410px) {
-  .calculator {
+  .container--calculator {
     flex-direction: column;
   }
 

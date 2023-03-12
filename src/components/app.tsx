@@ -24,30 +24,41 @@ export default function App() {
     : '0';
 
   const handleInputChange = (input: string, value: any) => {
+    // Needs runtime validation (using browser APIs)
+    // ...don't set state if invalid
     setInputData((data) => ({ ...data, [input]: value }));
   };
 
   const handleSave = () => alert('Not saved.');
 
   return (
-    <div className="calculator">
-      {/* INPUT */}
-      <MainForm
-        value={inputData}
-        onChange={handleInputChange}
-      />
-      {/* OUTPUT */}
-      <div className="output">
-        <p className="output-item output-item--large">
-          <span className="wrap-text">{mpg}</span>
-          mpg
-        </p>
-        <p className="output-item">{`£${mpp}/mi`}</p>
+    <>
+      <div className="container container--calculator">
+        {/* INPUT */}
+        <MainForm
+          value={inputData}
+          onChange={handleInputChange}
+        />
+        {/* OUTPUT */}
+        <div className="output">
+          <p className="output-item output-item--large">
+            <span className="wrap-text">{mpg}</span>
+            mpg
+          </p>
+          <p className="output-item">
+            £
+            <span className="wrap-text">{mpp}</span>
+            /mi
+          </p>
+        </div>
+        <button className="save-button" type="button" onClick={handleSave}>
+          Save
+        </button>
       </div>
-      <button className="save-button" type="button" onClick={handleSave}>
-        Save
-      </button>
-    </div>
+      <div className="container container--records">
+        <p>Saved records will appear here.</p>
+      </div>
+    </>
   );
 }
 
