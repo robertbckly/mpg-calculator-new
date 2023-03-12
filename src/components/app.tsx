@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { MainForm } from './main-form/main-form';
-import { Record as RecordT } from '../types/record';
+import MainForm from './main-form/main-form';
+import OutputDisplay from './output-display/output-display';
+import { Record as RecordT } from '../common/types/record';
 import './app.css';
 
-const LITRES_PER_GALLON_UK = 4.5462;
 const INIT_INPUT_DATA: RecordT = Object.freeze({
   id: null,
   volume: null,
@@ -15,14 +15,6 @@ const INIT_INPUT_DATA: RecordT = Object.freeze({
 export default function App() {
   const [inputData, setInputData] = useState<RecordT>(INIT_INPUT_DATA);
 
-  const mpg = inputData.distance && inputData.volume
-    ? (inputData.distance / (inputData.volume / LITRES_PER_GALLON_UK)).toFixed(2)
-    : '0';
-
-  const mpp = inputData.cost && inputData.distance
-    ? (inputData.cost / inputData.distance).toFixed(2)
-    : '0';
-
   const handleInputChange = (input: string, value: any) => {
     // Needs runtime validation (using browser APIs)
     // ...don't set state if invalid
@@ -32,33 +24,21 @@ export default function App() {
   const handleSave = () => alert('Not saved.');
 
   return (
-    <>
-      <div className="container container--calculator">
-        {/* INPUT */}
-        <MainForm
-          value={inputData}
-          onChange={handleInputChange}
-        />
-        {/* OUTPUT */}
-        <div className="output">
-          <p className="output-item output-item--large">
-            <span className="wrap-text">{mpg}</span>
-            mpg
-          </p>
-          <p className="output-item">
-            £
-            <span className="wrap-text">{mpp}</span>
-            /mi
-          </p>
-        </div>
+    <main>
+      <article className="container container--calculator">
+        <MainForm value={inputData} onChange={handleInputChange} />
+
+        <OutputDisplay data={inputData} />
+
         <button className="save-button" type="button" onClick={handleSave}>
           Save
         </button>
-      </div>
-      <div className="container container--records">
+      </article>
+
+      <article className="container container--records">
         <p>Saved records will appear here.</p>
-      </div>
-    </>
+      </article>
+    </main>
   );
 }
 

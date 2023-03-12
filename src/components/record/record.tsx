@@ -1,5 +1,5 @@
 import React from 'react';
-import { Record as RecordT } from '../../types/record';
+import { Record as RecordT } from '../../common/types/record';
 
 export type RecordProps = RecordT & {
   onEdit: (id: string) => void;

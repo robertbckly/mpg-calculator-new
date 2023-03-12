@@ -1,17 +1,17 @@
 import React, { ChangeEvent } from 'react';
-import { Record } from '../../types/record';
+import { Record } from '../../common/types/record';
 import './main-form.css';
 
 // type InputErrors = {
 //   [field in keyof Record]?: boolean;
 // };
 
-export type MainFormProps = {
+type MainFormProps = {
   value: Record;
   onChange: (input: string, value: any) => void;
 };
 
-export function MainForm({ value, onChange }: MainFormProps) {
+export default function MainForm({ value, onChange }: MainFormProps) {
   // const [errors, setErrors] = useState<InputErrors>({});
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
