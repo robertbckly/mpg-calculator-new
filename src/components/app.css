@@ -1,3 +1,12 @@
+:root {
+  --container-spacing: 2rem;
+}
+
+html {
+  /* Prevent automatic iOS text adjustment */
+  -webkit-text-size-adjust: 100%;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -19,6 +28,10 @@ button {
   overflow-wrap: anywhere;
 }
 
+.hint {
+  opacity: 0.5;
+}
+
 #root {
   flex: 1;
   max-width: 40rem;
@@ -26,6 +39,7 @@ button {
 }
 
 .container {
+  padding: var(--container-spacing);
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 0.65rem;
   background-color: rgb(30, 30, 30);
@@ -33,16 +47,16 @@ button {
 }
 
 .container--calculator {
-  --calculator-spacing: 2rem;
   display: flex;
-  padding: var(--calculator-spacing);
-  gap: var(--calculator-spacing);
+  gap: var(--container-spacing);
   position: relative;
 }
 
 .container--records {
-  padding: 2rem;
+  display: flex;
   margin-top: 3rem;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .output {
@@ -71,7 +85,7 @@ button {
   border-radius: 2rem;
   position: absolute;
   /* Calc removes remaining 25% of `gap` between columns */
-  left: calc(75% - calc(var(--calculator-spacing) * 0.25));
+  left: calc(75% - calc(var(--container-spacing) * 0.25));
   bottom: 0;
   font-weight: bold;
   line-height: 1rem;
@@ -97,8 +111,8 @@ button {
   }
 
   .output {
-    margin-top: calc(var(--calculator-spacing) / 2);
-    margin-bottom: var(--calculator-spacing);
+    margin-top: calc(var(--container-spacing) / 2);
+    margin-bottom: var(--container-spacing);
   }
 
   .save-button {

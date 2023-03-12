@@ -1,0 +1,20 @@
+.record {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.record__description,
+.record__data {
+  line-height: 175%;
+}
+
+.record__description {
+  font-size: 1rem;
+  margin: 0;
+  font-weight: normal;
+}
+
+.record__data {
+  margin: 0;
+  font-weight: bold;
+}

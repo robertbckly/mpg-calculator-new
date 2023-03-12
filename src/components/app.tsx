@@ -3,6 +3,7 @@ import MainForm from './main-form/main-form';
 import OutputDisplay from './output-display/output-display';
 import { Record as RecordT } from '../common/types/record';
 import './app.css';
+import Record from './record/record';
 
 const INIT_INPUT_DATA: RecordT = Object.freeze({
   id: null,
@@ -14,14 +15,19 @@ const INIT_INPUT_DATA: RecordT = Object.freeze({
 
 export default function App() {
   const [inputData, setInputData] = useState<RecordT>(INIT_INPUT_DATA);
+  const [recordList, setRecordList] = useState<RecordT[]>([]);
 
   const handleInputChange = (input: string, value: any) => {
     // Needs runtime validation (using browser APIs)
     // ...don't set state if invalid
-    setInputData((data) => ({ ...data, [input]: value }));
+    let castValue = value;
+    if (input === 'volume' || input === 'distance' || input === 'cost') {
+      castValue = Number(value);
+    }
+    setInputData((data) => ({ ...data, [input]: castValue }));
   };
 
-  const handleSave = () => alert('Not saved.');
+  const handleSave = () => alert('Saving not implemented yet :-(');
 
   return (
     <main>
@@ -36,7 +42,44 @@ export default function App() {
       </article>
 
       <article className="container container--records">
-        <p>Saved records will appear here.</p>
+        {recordList.length
+          ? <p className="hint">Saved calculations will appear here.</p>
+          : (
+            <>
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+              <Record data={INIT_INPUT_DATA} />
+            </>
+          )}
       </article>
     </main>
   );
