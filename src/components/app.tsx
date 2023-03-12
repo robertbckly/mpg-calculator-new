@@ -3,6 +3,7 @@ import { MainForm } from './main-form/main-form';
 import { Record as RecordT } from '../types/record';
 import './app.css';
 
+const LITRES_PER_GALLON_UK = 4.5462;
 const INIT_INPUT_DATA: RecordT = Object.freeze({
   id: null,
   volume: null,
@@ -15,7 +16,7 @@ export default function App() {
   const [inputData, setInputData] = useState<RecordT>(INIT_INPUT_DATA);
 
   const mpg = inputData.distance && inputData.volume
-    ? (inputData.distance / (inputData.volume / 4.5462)).toFixed(2)
+    ? (inputData.distance / (inputData.volume / LITRES_PER_GALLON_UK)).toFixed(2)
     : '0';
 
   const mpp = inputData.cost && inputData.distance
@@ -25,6 +26,8 @@ export default function App() {
   const handleInputChange = (input: string, value: any) => {
     setInputData((data) => ({ ...data, [input]: value }));
   };
+
+  const handleSave = () => alert('Not saved.');
 
   return (
     <div className="calculator">
@@ -41,7 +44,7 @@ export default function App() {
         </p>
         <p className="output-item">{`£${mpp}/mi`}</p>
       </div>
-      <button className="save-button" type="button" onClick={() => alert('Not saved.')}>
+      <button className="save-button" type="button" onClick={handleSave}>
         Save
       </button>
     </div>

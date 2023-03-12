@@ -64,7 +64,8 @@ button {
   border-radius: 2rem;
   position: absolute;
   bottom: calc(-1.5rem);
-  left: 75%;
+  /* Calc removes remaining 25% of `gap` between columns */
+  left: calc(75% - calc(var(--calculator-spacing) * 0.25));
   font-weight: bold;
   line-height: 1rem;
   background-color: white;
@@ -83,11 +84,12 @@ button {
 */
 @media screen and (max-width: 410px) {
   .calculator {
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 
   .output {
-    margin-top: var(--calculator-spacing);
+    margin-top: calc(var(--calculator-spacing) / 2);
+    margin-bottom: var(--calculator-spacing);
   }
 
   .save-button {
