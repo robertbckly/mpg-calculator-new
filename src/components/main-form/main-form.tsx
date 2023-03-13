@@ -8,7 +8,7 @@ import './main-form.css';
 
 type MainFormProps = {
   value: Record;
-  onChange: (input: string, value: any) => void;
+  onChange: (input: string, value: string) => void;
 };
 
 export default function MainForm({ value, onChange }: MainFormProps) {
@@ -24,7 +24,7 @@ export default function MainForm({ value, onChange }: MainFormProps) {
   return (
     <form className="main-form" onSubmit={(e) => e.preventDefault()}>
       <label htmlFor="volume" className="main-form__label">
-        Litres
+        Litres *
         <input
           className="main-form__input"
           type="number"
@@ -36,7 +36,7 @@ export default function MainForm({ value, onChange }: MainFormProps) {
         />
       </label>
       <label htmlFor="distance" className="main-form__label">
-        Miles
+        Miles *
         <input
           className="main-form__input"
           type="number"

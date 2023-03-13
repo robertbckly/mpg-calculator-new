@@ -6,6 +6,12 @@ import OutputDisplay from './output-display/output-display';
 import Record from './record/record';
 import './app.css';
 
+/**
+ * NOW:
+ * - work on <Record /> to hide the delete button in a `...` menu
+ * - work on validation
+ */
+
 const LOCAL_STORAGE_NAME = 'recordList';
 const INIT_INPUT_DATA: RecordT = Object.freeze({
   id: null,
@@ -19,6 +25,8 @@ export default function App() {
   const [inputData, setInputData] = useState<RecordT>(INIT_INPUT_DATA);
   const [recordList, setRecordList] = useState<RecordT[]>([]);
   const [synced, setSynced] = useState(false);
+
+  const savingEnabled = Boolean(inputData.volume && inputData.distance);
 
   useEffect(() => {
     // Sync state with storage on first load
@@ -34,10 +42,10 @@ export default function App() {
 
   const resetInput = () => setInputData(INIT_INPUT_DATA);
 
-  const handleInputChange = (input: string, value: any) => {
+  const handleInputChange = (input: string, value: string) => {
     // Needs runtime validation (using browser APIs)
     // ...don't set state if invalid
-    let castValue = value;
+    let castValue: string | number = value;
     if (input === 'volume' || input === 'distance' || input === 'cost') {
       castValue = Number(value);
     }
@@ -45,8 +53,9 @@ export default function App() {
   };
 
   const handleSave = () => {
+    if (!savingEnabled) return;
     const newRecord: RecordT = { ...inputData, id: uuid() };
-    setRecordList((records) => ([...records, newRecord]));
+    setRecordList((records) => ([newRecord, ...records]));
     resetInput();
   };
 
@@ -61,7 +70,14 @@ export default function App() {
       <article className="container container--calculator">
         <MainForm value={inputData} onChange={handleInputChange} />
         <OutputDisplay data={inputData} />
-        <button className="save-button" type="button" onClick={handleSave}>Save</button>
+        <button
+          type="button"
+          className="save-button"
+          onClick={handleSave}
+          disabled={!savingEnabled}
+        >
+          Save
+        </button>
       </article>
 
       <article className="container container--records">

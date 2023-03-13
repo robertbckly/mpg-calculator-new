@@ -9,13 +9,17 @@ type RecordProps = {
 };
 
 export default function Record({ data, onDelete }: RecordProps) {
-  const mpg = milesPerGallon(data);
   const cpm = costPerMile(data);
+  const mpgString = `${milesPerGallon(data)}mpg`;
+  const cpmString = cpm ? ` – £${cpm}/mi` : null;
   return (
     <article className="record">
       {/* Temporarily using ID as description */}
       <h2 className="record__description">{data.id}</h2>
-      <p className="record__data">{`${mpg}mpg – £${cpm}/mi`}</p>
+      <p className="record__data">
+        {mpgString}
+        {cpmString}
+      </p>
       <button type="button" onClick={() => onDelete(data.id)}>Delete</button>
     </article>
   );
