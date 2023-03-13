@@ -5,17 +5,18 @@ import './record.css';
 
 type RecordProps = {
   data: RecordT;
-  // onEdit: (id: string) => void;
-  // onDelete: (id: string) => void;
+  onDelete: (id: RecordT['id']) => void;
 };
 
-export default function Record({ data }: RecordProps) {
+export default function Record({ data, onDelete }: RecordProps) {
   const mpg = milesPerGallon(data);
   const cpm = costPerMile(data);
   return (
     <article className="record">
-      <h2 className="record__description">{data.description || 'Description'}</h2>
+      {/* Temporarily using ID as description */}
+      <h2 className="record__description">{data.id}</h2>
       <p className="record__data">{`${mpg}mpg – £${cpm}/mi`}</p>
+      <button type="button" onClick={() => onDelete(data.id)}>Delete</button>
     </article>
   );
 }
