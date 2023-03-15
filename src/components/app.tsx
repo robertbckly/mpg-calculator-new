@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { Record as RecordT } from '../common/types/record';
+import Modal from './modal/modal';
 import MainForm from './main-form/main-form';
 import OutputDisplay from './output-display/output-display';
 import Record from './record/record';
@@ -8,8 +9,11 @@ import './app.css';
 
 /**
  * NOW:
- * - work on <Record /> to hide the delete button in a `...` menu
- * - work on validation
+ * - Finish modal...
+ *    - can a <dialog />'s `open` attribute *be* the state?
+ *    - or does this violate controlled components?
+ * - <Record /> should hide the `Delete` button in a `...` menu
+ * - Add input validation
  */
 
 const LOCAL_STORAGE_NAME = 'recordList';
@@ -22,6 +26,7 @@ const INIT_INPUT_DATA: RecordT = Object.freeze({
 });
 
 export default function App() {
+  const [modalOpen, setModalOpen] = useState(false);
   const [inputData, setInputData] = useState<RecordT>(INIT_INPUT_DATA);
   const [recordList, setRecordList] = useState<RecordT[]>([]);
   const [synced, setSynced] = useState(false);
@@ -57,6 +62,8 @@ export default function App() {
     const newRecord: RecordT = { ...inputData, id: uuid() };
     setRecordList((records) => ([newRecord, ...records]));
     resetInput();
+    // Example
+    setModalOpen(true);
   };
 
   const handleDelete = (id: RecordT['id']) => {
@@ -66,6 +73,7 @@ export default function App() {
 
   return (
     <main>
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)} />
 
       <article className="container container--calculator">
         <MainForm value={inputData} onChange={handleInputChange} />

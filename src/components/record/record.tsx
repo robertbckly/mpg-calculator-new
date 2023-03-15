@@ -14,8 +14,8 @@ export default function Record({ data, onDelete }: RecordProps) {
   const cpmString = cpm ? ` – £${cpm}/mi` : null;
   return (
     <article className="record">
-      {/* Temporarily using ID as description */}
-      <h2 className="record__description">{data.id}</h2>
+      {/* Replace with real description */}
+      <h2 className="record__description">Description goes here...</h2>
       <p className="record__data">
         {mpgString}
         {cpmString}
