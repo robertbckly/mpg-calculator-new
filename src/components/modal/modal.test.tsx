@@ -11,12 +11,12 @@ test('renders when `open` is true', () => {
   expect(screen.getByRole('dialog')).toBeVisible();
 });
 
-test('doesn\'t render if `open` is false', () => {
+test("doesn't render when `open` is false", () => {
   render(<Modal open={false} onClose={() => {}} />);
   expect(screen.queryByRole('dialog')).toBeNull();
 });
 
-test('doesn\'t call `showModal()` again when re-rendering', () => {
+test("doesn't call `showModal()` again when re-rendering", () => {
   const { rerender } = render(<Modal open onClose={() => {}} />);
   rerender(<Modal open onClose={() => {}} />);
 });

@@ -13,13 +13,10 @@ export default function OutputDisplay({ data }: OutputDisplayProps) {
   return (
     <div className="output">
       <p className="output-item output-item--large">
-        <span className="wrap-text">{mpgValueString}</span>
-        mpg
+        <span className="wrap-text">{mpgValueString}</span>mpg
       </p>
       <p className="output-item">
-        £
-        <span className="wrap-text">{cpmValueString}</span>
-        /mi
+        £<span className="wrap-text">{cpmValueString}</span>/mi
       </p>
     </div>
   );

@@ -6,7 +6,7 @@ type ModalProps = {
   onClose: () => void;
 };
 
-export default function Modal({ open, onClose }:ModalProps) {
+export default function Modal({ open, onClose }: ModalProps) {
   const element = useRef<HTMLDialogElement>(null);
 
   // Prevent element throwing error if already open

@@ -37,11 +37,15 @@ export default function App() {
     // Sync state with storage on first load
     if (!synced) {
       const serialisedRecords = window.localStorage.getItem(LOCAL_STORAGE_NAME);
-      if (serialisedRecords?.length) setRecordList(JSON.parse(serialisedRecords));
+      if (serialisedRecords?.length)
+        setRecordList(JSON.parse(serialisedRecords));
       setSynced(true);
     } else {
       // Sync storage with state on change
-      window.localStorage.setItem(LOCAL_STORAGE_NAME, JSON.stringify(recordList));
+      window.localStorage.setItem(
+        LOCAL_STORAGE_NAME,
+        JSON.stringify(recordList)
+      );
     }
   }, [synced, recordList]);
 
@@ -60,7 +64,7 @@ export default function App() {
   const handleSave = () => {
     if (!savingEnabled) return;
     const newRecord: RecordT = { ...inputData, id: uuid() };
-    setRecordList((records) => ([newRecord, ...records]));
+    setRecordList((records) => [newRecord, ...records]);
     resetInput();
     // Example
     setModalOpen(true);
@@ -89,17 +93,14 @@ export default function App() {
       </article>
 
       <article className="container container--records">
-        {!recordList.length
-          ? <p className="hint">Saved calculations will appear here.</p>
-          : recordList.map((record) => (
-            <Record
-              key={record.id}
-              data={record}
-              onDelete={handleDelete}
-            />
-          ))}
+        {!recordList.length ? (
+          <p className="hint">Saved calculations will appear here.</p>
+        ) : (
+          recordList.map((record) => (
+            <Record key={record.id} data={record} onDelete={handleDelete} />
+          ))
+        )}
       </article>
-
     </main>
   );
 }

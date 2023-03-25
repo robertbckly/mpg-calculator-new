@@ -20,7 +20,9 @@ export default function Record({ data, onDelete }: RecordProps) {
         {mpgString}
         {cpmString}
       </p>
-      <button type="button" onClick={() => onDelete(data.id)}>Delete</button>
+      <button type="button" onClick={() => onDelete(data.id)}>
+        Delete
+      </button>
     </article>
   );
 }
