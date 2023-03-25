@@ -22,7 +22,7 @@ export default function Modal({ open, onClose }:ModalProps) {
       onClose={() => onClose()}
     >
       <p>Example...</p>
-      <form method="dialog">
+      <form aria-label="Form to close the dialog." method="dialog">
         <button type="submit">Close</button>
       </form>
     </dialog>
