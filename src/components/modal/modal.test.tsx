@@ -6,6 +6,18 @@ import Modal from './modal';
 // Prevent Jest runtime error
 jest.mock('./modal.css', () => {});
 
+beforeAll(() => {
+  // Mock dialog functionality as it's not in jsdom.
+  let dialogOpen = false;
+  HTMLDialogElement.prototype.showModal = function mock(
+    this: HTMLDialogElement
+  ) {
+    if (dialogOpen) throw new Error("can't call twice");
+    dialogOpen = true;
+    this.open = true;
+  };
+});
+
 test('renders when `open` is true', () => {
   render(<Modal open onClose={() => {}} />);
   expect(screen.getByRole('dialog')).toBeVisible();
@@ -16,10 +28,12 @@ test("doesn't render when `open` is false", () => {
   expect(screen.queryByRole('dialog')).toBeNull();
 });
 
-test("doesn't call `showModal()` again when re-rendering", () => {
+test("doesn't throw error by calling `showModal()` again when re-rendering", () => {
+  // Doesn't work unless `rerender` is called twice.
+  // I think it retains context between calls? (Which is needed.)
   const { rerender } = render(<Modal open onClose={() => {}} />);
   rerender(<Modal open onClose={() => {}} />);
-  // this needs an assertion?
+  rerender(<Modal open onClose={() => {}} />);
 });
 
 test('calls `onClose` prop onClose', async () => {
