@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { Record as RecordT } from '../common/types/record';
-import Modal from './modal/modal';
+import DescriptionModal from './description-modal/description-modal';
 import MainForm from './main-form/main-form';
 import OutputDisplay from './output-display/output-display';
 import Record from './record/record';
@@ -37,15 +37,13 @@ export default function App() {
     // Sync state with storage on first load
     if (!synced) {
       const serialisedRecords = window.localStorage.getItem(LOCAL_STORAGE_NAME);
-      if (serialisedRecords?.length)
+      if (serialisedRecords?.length) {
         setRecordList(JSON.parse(serialisedRecords));
+      }
       setSynced(true);
     } else {
       // Sync storage with state on change
-      window.localStorage.setItem(
-        LOCAL_STORAGE_NAME,
-        JSON.stringify(recordList)
-      );
+      window.localStorage.setItem(LOCAL_STORAGE_NAME, JSON.stringify(recordList));
     }
   }, [synced, recordList]);
 
@@ -62,7 +60,9 @@ export default function App() {
   };
 
   const handleSave = () => {
-    if (!savingEnabled) return;
+    if (!savingEnabled) {
+      return;
+    }
     const newRecord: RecordT = { ...inputData, id: uuid() };
     setRecordList((records) => [newRecord, ...records]);
     resetInput();
@@ -71,15 +71,18 @@ export default function App() {
   };
 
   const handleDelete = (id: RecordT['id']) => {
-    if (!id) return;
+    if (!id) {
+      return;
+    }
     setRecordList((records) => records.filter((record) => record.id !== id));
   };
 
   return (
     <main>
-      <Modal open={modalOpen} onClose={() => setModalOpen(false)} />
+      {modalOpen && <DescriptionModal onClose={() => setModalOpen(false)} />}
 
-      <article className="container container--calculator">
+      <section className="container container--calculator">
+        <h2>Calculator</h2>
         <MainForm value={inputData} onChange={handleInputChange} />
         <OutputDisplay data={inputData} />
         <button
@@ -90,9 +93,10 @@ export default function App() {
         >
           Save
         </button>
-      </article>
+      </section>
 
-      <article className="container container--records">
+      <section className="container container--records">
+        <h2>Record List</h2>
         {!recordList.length ? (
           <p className="hint">Saved calculations will appear here.</p>
         ) : (
@@ -100,7 +104,7 @@ export default function App() {
             <Record key={record.id} data={record} onDelete={handleDelete} />
           ))
         )}
-      </article>
+      </section>
     </main>
   );
 }

@@ -1,0 +1,41 @@
+.modal {
+  z-index: 1;
+  border-radius: 0.5rem;
+}
+
+.modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.desc-form__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.desc-form__input {
+  padding: 0.33rem 0.5rem;
+  border: 2px solid rgba(0, 0, 0, 0.25);
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
+.desc-form__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-around;
+}
+
+.desc-form__button {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: rgba(46, 134, 53, 0.7);
+  color: white;
+  cursor: pointer;
+}
+
+.desc-form__button--cancel {
+  background-color: rgb(100, 100, 100);
+}
