@@ -24,7 +24,7 @@ button {
   font-size: 1rem;
 }
 
-.wrap-text {
+.text-wrap {
   overflow-wrap: anywhere;
 }
 

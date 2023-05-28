@@ -9,14 +9,14 @@ import './app.css';
 
 /**
  * NOW:
- * - Finish modal...
- *    - can a <dialog />'s `open` attribute *be* the state?
- *    - or does this violate controlled components?
+ * - Using <sections> with headings... can I hide these but keep good accessibility?
+ * - Finish modals
  * - <Record /> should hide the `Delete` button in a `...` menu
  * - Add input validation
  */
 
 const LOCAL_STORAGE_NAME = 'recordList';
+const ARIA_BUSY_DELAY_MS = 3000;
 const INIT_INPUT_DATA: RecordT = Object.freeze({
   id: null,
   volume: null,
@@ -30,6 +30,7 @@ export default function App() {
   const [inputData, setInputData] = useState<RecordT>(INIT_INPUT_DATA);
   const [recordList, setRecordList] = useState<RecordT[]>([]);
   const [synced, setSynced] = useState(false);
+  const [ariaBusy, setAriaBusy] = useState(false);
 
   const savingEnabled = Boolean(inputData.volume && inputData.distance);
 
@@ -46,6 +47,13 @@ export default function App() {
       window.localStorage.setItem(LOCAL_STORAGE_NAME, JSON.stringify(recordList));
     }
   }, [synced, recordList]);
+
+  // Delay ARIA announcement until after last input
+  useEffect(() => {
+    setAriaBusy(true);
+    const timeout = setTimeout(() => setAriaBusy(false), ARIA_BUSY_DELAY_MS);
+    return () => clearTimeout(timeout);
+  }, [inputData]);
 
   const resetInput = () => setInputData(INIT_INPUT_DATA);
 
@@ -81,10 +89,12 @@ export default function App() {
     <main>
       {modalOpen && <DescriptionModal onClose={() => setModalOpen(false)} />}
 
-      <section className="container container--calculator">
-        <h2>Calculator</h2>
+      <section
+        className="container container--calculator"
+        aria-label="MPG calculator input and output"
+      >
         <MainForm value={inputData} onChange={handleInputChange} />
-        <OutputDisplay data={inputData} />
+        <OutputDisplay data={inputData} ariaBusy={ariaBusy} />
         <button
           type="button"
           className="save-button"
@@ -95,8 +105,7 @@ export default function App() {
         </button>
       </section>
 
-      <section className="container container--records">
-        <h2>Record List</h2>
+      <section className="container container--records" aria-label="Saved MPG calculations">
         {!recordList.length ? (
           <p className="hint">Saved calculations will appear here.</p>
         ) : (

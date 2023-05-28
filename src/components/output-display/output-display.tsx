@@ -2,9 +2,12 @@ import React from 'react';
 import { Record } from '../../common/types/record';
 import { costPerMile, milesPerGallon } from '../../common/utils/calculations';
 
-type OutputDisplayProps = { data: Record };
+type OutputDisplayProps = {
+  data: Record;
+  ariaBusy?: boolean;
+};
 
-export default function OutputDisplay({ data }: OutputDisplayProps) {
+export default function OutputDisplay({ data, ariaBusy }: OutputDisplayProps) {
   const mpg = milesPerGallon(data);
   const cpm = costPerMile(data);
   const mpgValueString = mpg || '-- ';
@@ -12,12 +15,21 @@ export default function OutputDisplay({ data }: OutputDisplayProps) {
 
   return (
     <div className="output">
-      <p className="output-item output-item--large">
-        <span className="wrap-text">{mpgValueString}</span>mpg
+      <p
+        className="output-item output-item--large"
+        aria-live="polite"
+        aria-atomic
+        aria-busy={ariaBusy}
+      >
+        <span className="text-wrap">{mpgValueString}</span>mpg
       </p>
       <p className="output-item">
-        £<span className="wrap-text">{cpmValueString}</span>/mi
+        £<span className="text-wrap">{cpmValueString}</span> per mile
       </p>
     </div>
   );
 }
+
+OutputDisplay.defaultProps = {
+  ariaBusy: undefined,
+};

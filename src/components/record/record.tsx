@@ -11,7 +11,7 @@ type RecordProps = {
 export default function Record({ data, onDelete }: RecordProps) {
   const cpm = costPerMile(data);
   const mpgString = `${milesPerGallon(data)}mpg`;
-  const cpmString = cpm ? ` – £${cpm}/mi` : null;
+  const cpmString = cpm ? ` – £${cpm} per mile` : null;
   return (
     <article className="record">
       {/* Replace with real description */}
