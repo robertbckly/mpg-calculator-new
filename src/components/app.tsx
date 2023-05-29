@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { Record as RecordT } from '../common/types/record';
-import DescriptionDialog from './description-dialog/description-dialog';
 import MainForm from './main-form/main-form';
 import OutputDisplay from './output-display/output-display';
-import Record from './record/record';
+import RecordList from './record-list/record-list';
+import DescriptionDialog from './description-dialog/description-dialog';
 import './app.css';
 
 /**
  * NOW:
- * - Using <sections> with headings... can I hide these but keep good accessibility?
- * - Finish modals
  * - <Record /> should hide the `Delete` button in a `...` menu
  * - Add input validation
  */
@@ -55,7 +53,9 @@ export default function App() {
     return () => clearTimeout(timeout);
   }, [inputData]);
 
-  const resetInput = () => setInputData(INIT_INPUT_DATA);
+  const resetInput = () => {
+    setInputData(INIT_INPUT_DATA);
+  };
 
   const saveRecord = (description: string) => {
     if (!savingEnabled) {
@@ -90,38 +90,28 @@ export default function App() {
 
   return (
     <main>
+      <section className="container container--calculator" aria-label="MPG calculator">
+        <MainForm value={inputData} onChange={handleInputChange} />
+        <OutputDisplay data={inputData} ariaBusy={ariaBusy} />
+
+        <button
+          type="button"
+          disabled={!savingEnabled}
+          className="save-button"
+          onClick={() => setShowSaveDialog(true)}
+        >
+          Save
+        </button>
+      </section>
+
+      <RecordList records={recordList} onDelete={(id: string | null) => deleteRecord(id)} />
+
       {showSaveDialog && (
         <DescriptionDialog
           onSubmit={handleSaveConfirmation}
           onClose={() => setShowSaveDialog(false)}
         />
       )}
-
-      <section
-        className="container container--calculator"
-        aria-label="MPG calculator input and output"
-      >
-        <MainForm value={inputData} onChange={handleInputChange} />
-        <OutputDisplay data={inputData} ariaBusy={ariaBusy} />
-        <button
-          type="button"
-          className="save-button"
-          onClick={() => setShowSaveDialog(true)}
-          disabled={!savingEnabled}
-        >
-          Save
-        </button>
-      </section>
-
-      <section className="container container--records" aria-label="Saved MPG calculations">
-        {!recordList.length ? (
-          <p className="hint">Saved calculations will appear here.</p>
-        ) : (
-          recordList.map((record) => (
-            <Record key={record.id} data={record} onDelete={deleteRecord} />
-          ))
-        )}
-      </section>
     </main>
   );
 }
