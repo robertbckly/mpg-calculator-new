@@ -25,19 +25,17 @@ export default function Record({ recordData, onDelete }: RecordProps) {
   };
 
   return (
-    <>
-      <article className="record">
-        {recordData.description && (
-          <h2 className="record__description">{recordData.description}</h2>
-        )}
-        <p className="record__data">
-          {mpgString}
-          {cpmString}
-        </p>
-        <button type="button" onClick={() => setShowDeleteDialog(true)}>
-          Delete
-        </button>
-      </article>
+    <article className="record">
+      {recordData.description && <h2 className="record__description">{recordData.description}</h2>}
+
+      <p className="record__data">
+        {mpgString}
+        {cpmString}
+      </p>
+
+      <button type="button" onClick={() => setShowDeleteDialog(true)}>
+        Delete
+      </button>
 
       {showDeleteDialog && (
         <DeleteDialog
@@ -46,6 +44,6 @@ export default function Record({ recordData, onDelete }: RecordProps) {
           onClose={() => setShowDeleteDialog(false)}
         />
       )}
-    </>
+    </article>
   );
 }
