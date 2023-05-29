@@ -1,0 +1,19 @@
+.dialog-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-around;
+}
+
+.dialog-actions__button {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: rgb(100, 100, 100);
+  color: white;
+  cursor: pointer;
+}
+
+.dialog-actions__button--confirm {
+  background-color: rgba(35, 111, 217, 0.7);
+}

@@ -1,0 +1,11 @@
+.dialog {
+  z-index: 1;
+  border-radius: 0.5rem;
+  border: 1px solid white;
+  background-color: black;
+  color: white;
+}
+
+.dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.75);
+}

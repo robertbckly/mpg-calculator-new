@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { Record as RecordT } from '../common/types/record';
-import DescriptionModal from './description-modal/description-modal';
+import DescriptionDialog from './description-dialog/description-dialog';
 import MainForm from './main-form/main-form';
 import OutputDisplay from './output-display/output-display';
 import Record from './record/record';
@@ -26,7 +26,7 @@ const INIT_INPUT_DATA: RecordT = Object.freeze({
 });
 
 export default function App() {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [showSaveDialog, setShowSaveDialog] = useState(false);
   const [inputData, setInputData] = useState<RecordT>(INIT_INPUT_DATA);
   const [recordList, setRecordList] = useState<RecordT[]>([]);
   const [synced, setSynced] = useState(false);
@@ -57,6 +57,22 @@ export default function App() {
 
   const resetInput = () => setInputData(INIT_INPUT_DATA);
 
+  const saveRecord = (description: string) => {
+    if (!savingEnabled) {
+      return;
+    }
+    const newRecord: RecordT = { ...inputData, id: uuid(), description };
+    setRecordList((records) => [newRecord, ...records]);
+    resetInput();
+  };
+
+  const deleteRecord = (id: RecordT['id']) => {
+    if (!id) {
+      return;
+    }
+    setRecordList((records) => records.filter((record) => record.id !== id));
+  };
+
   const handleInputChange = (input: string, value: string) => {
     // Needs runtime validation (using browser APIs)
     // ...don't set state if invalid
@@ -67,27 +83,19 @@ export default function App() {
     setInputData((data) => ({ ...data, [input]: castValue }));
   };
 
-  const handleSave = () => {
-    if (!savingEnabled) {
-      return;
-    }
-    const newRecord: RecordT = { ...inputData, id: uuid() };
-    setRecordList((records) => [newRecord, ...records]);
-    resetInput();
-    // Example
-    setModalOpen(true);
-  };
-
-  const handleDelete = (id: RecordT['id']) => {
-    if (!id) {
-      return;
-    }
-    setRecordList((records) => records.filter((record) => record.id !== id));
+  const handleSaveConfirmation = (description: string) => {
+    saveRecord(description);
+    setShowSaveDialog(false);
   };
 
   return (
     <main>
-      {modalOpen && <DescriptionModal onClose={() => setModalOpen(false)} />}
+      {showSaveDialog && (
+        <DescriptionDialog
+          onSubmit={handleSaveConfirmation}
+          onClose={() => setShowSaveDialog(false)}
+        />
+      )}
 
       <section
         className="container container--calculator"
@@ -98,7 +106,7 @@ export default function App() {
         <button
           type="button"
           className="save-button"
-          onClick={handleSave}
+          onClick={() => setShowSaveDialog(true)}
           disabled={!savingEnabled}
         >
           Save
@@ -110,7 +118,7 @@ export default function App() {
           <p className="hint">Saved calculations will appear here.</p>
         ) : (
           recordList.map((record) => (
-            <Record key={record.id} data={record} onDelete={handleDelete} />
+            <Record key={record.id} data={record} onDelete={deleteRecord} />
           ))
         )}
       </section>
