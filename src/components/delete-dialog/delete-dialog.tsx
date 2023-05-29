@@ -10,7 +10,7 @@ type DeleteDialogProps = {
 };
 
 export default function DeleteDialog({ record, onClose, onDelete }: DeleteDialogProps) {
-  const title = `Delete "${record.description}"?`;
+  const title = `Delete ${record.description?.length ? `"${record.description}"` : 'record'}?`;
   return (
     <Dialog onClose={onClose} a11yName={title}>
       <DialogTitle>{title}</DialogTitle>
