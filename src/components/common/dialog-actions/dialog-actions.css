@@ -1,7 +1,8 @@
 .dialog-actions {
   display: flex;
-  gap: 1rem;
+  flex-wrap: wrap;
   justify-content: space-around;
+  gap: 1rem;
 }
 
 .dialog-actions__button {

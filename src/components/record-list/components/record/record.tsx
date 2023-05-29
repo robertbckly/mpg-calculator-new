@@ -26,15 +26,24 @@ export default function Record({ recordData, onDelete }: RecordProps) {
 
   return (
     <article className="record">
-      {recordData.description && <h2 className="record__description">{recordData.description}</h2>}
+      <div>
+        {recordData.description && (
+          <h2 className="record__description">{recordData.description}</h2>
+        )}
 
-      <p className="record__data">
-        {mpgString}
-        {cpmString}
-      </p>
+        <p className="record__data">
+          {mpgString}
+          {cpmString}
+        </p>
+      </div>
 
-      <button type="button" onClick={() => setShowDeleteDialog(true)}>
-        Delete
+      <button
+        type="button"
+        className="record__delete-button"
+        onClick={() => setShowDeleteDialog(true)}
+        aria-label="Delete"
+      >
+        X
       </button>
 
       {showDeleteDialog && (
