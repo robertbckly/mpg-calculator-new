@@ -1,4 +1,3 @@
-import React from 'react';
 import { Record } from '../../common/types/record';
 import { costPerMile, milesPerGallon } from '../../common/utils/calculations';
 

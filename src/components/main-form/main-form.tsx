@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import { Record } from '../../common/types/record';
 import './main-form.css';
 
