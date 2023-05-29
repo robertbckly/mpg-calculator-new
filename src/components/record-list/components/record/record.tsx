@@ -15,17 +15,17 @@ export default function Record({ recordData, onDelete }: RecordProps) {
   const mpgString = `${milesPerGallon(recordData)}mpg`;
   const cpmString = cpm ? ` – £${cpm} per mile` : null;
 
-  const handleClose = () => {
+  const handleDialogClose = () => {
     setShowDeleteDialog(false);
   };
 
   const handleDelete = () => {
-    handleClose();
+    handleDialogClose();
     onDelete(recordData.id);
   };
 
   return (
-    <article className="record">
+    <li className="record">
       <div>
         {recordData.description && (
           <h2 className="record__description">{recordData.description}</h2>
@@ -53,6 +53,6 @@ export default function Record({ recordData, onDelete }: RecordProps) {
           onClose={() => setShowDeleteDialog(false)}
         />
       )}
-    </article>
+    </li>
   );
 }
