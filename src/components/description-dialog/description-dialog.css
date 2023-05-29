@@ -1,8 +1,8 @@
 .description-dialog__input {
   width: 100%;
   padding: 0.33rem 0.5rem;
-  border: 1px solid white;
-  border-radius: 0.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.65rem;
   margin: 1rem 0;
   background-color: black;
   color: inherit;
