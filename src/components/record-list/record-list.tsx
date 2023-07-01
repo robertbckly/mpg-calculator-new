@@ -1,6 +1,6 @@
 import { Record as TRecord } from '../../common/types/record';
 import Record, { RecordProps } from './components/record/record';
-import '../app.css';
+import '../app/app.css';
 import './record-list.css';
 
 export type RecordListProps = {

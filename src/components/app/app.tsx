@@ -1,16 +1,21 @@
 import { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
-import { Record as RecordT } from '../common/types/record';
-import MainForm from './main-form/main-form';
-import OutputDisplay from './output-display/output-display';
-import RecordList from './record-list/record-list';
-import DescriptionDialog from './description-dialog/description-dialog';
+import { Record as RecordT } from '../../common/types/record';
+import MainForm from '../main-form/main-form';
+import OutputDisplay from '../output-display/output-display';
+import RecordList from '../record-list/record-list';
+import DescriptionDialog from '../description-dialog/description-dialog';
 import './app.css';
 
 /**
- * NOW:
- * - <Record /> should hide the `Delete` button in a `...` menu
- * - Add input validation
+ * -- TODO --
+ * -> Rename `Record` type to avoid collision with TypeScript utility type
+ * -> Add record editing (load into calculator; fields populated; saving overwrites)
+ * -> Add feedback for invalid input
+ * -> Check aria announcement has been implemented properly
+ * -> Improve UI + UX
+ * -> Build + deploy
+ * --      --
  */
 
 const LOCAL_STORAGE_NAME = 'recordList';
