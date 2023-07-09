@@ -1,7 +1,5 @@
 import { KeyboardEvent, useState } from 'react';
-import Dialog from '../common/dialog/dialog';
-import DialogTitle from '../common/dialog-title/dialog-title';
-import DialogActions from '../common/dialog-actions/dialog-actions';
+import { Dialog, DialogTitle, DialogActions } from '../common/common';
 import './description-dialog.css';
 
 type DescriptionDialogProps = {
@@ -11,7 +9,7 @@ type DescriptionDialogProps = {
 
 const title = 'Enter a description (optional)';
 
-export default function DescriptionDialog({ onClose, onSubmit }: DescriptionDialogProps) {
+export const DescriptionDialog = ({ onClose, onSubmit }: DescriptionDialogProps) => {
   const [description, setDescription] = useState('');
 
   const handleSubmit = () => {
@@ -37,4 +35,4 @@ export default function DescriptionDialog({ onClose, onSubmit }: DescriptionDial
       <DialogActions confirmButtonText="Save" onCancel={onClose} onConfirm={handleSubmit} />
     </Dialog>
   );
-}
+};

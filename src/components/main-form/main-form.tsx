@@ -11,7 +11,7 @@ type MainFormProps = {
   onChange: (input: string, value: string) => void;
 };
 
-export default function MainForm({ value, onChange }: MainFormProps) {
+export const MainForm = ({ value, onChange }: MainFormProps) => {
   // const [errors, setErrors] = useState<InputErrors>({});
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -61,4 +61,4 @@ export default function MainForm({ value, onChange }: MainFormProps) {
       </label>
     </form>
   );
-}
+};

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Record as RecordT } from '../../../../common/types/record';
 import { costPerMile, milesPerGallon } from '../../../../common/utils/calculations';
-import DeleteDialog from '../../../delete-dialog/delete-dialog';
+import { DeleteDialog } from '../../../delete-dialog/delete-dialog';
 import './record.css';
 
 export type RecordProps = {
@@ -9,7 +9,7 @@ export type RecordProps = {
   onDelete: (id: RecordT['id']) => void;
 };
 
-export default function Record({ recordData, onDelete }: RecordProps) {
+export const Record = ({ recordData, onDelete }: RecordProps) => {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const cpm = costPerMile(recordData);
   const mpgString = `${milesPerGallon(recordData)}mpg`;
@@ -55,4 +55,4 @@ export default function Record({ recordData, onDelete }: RecordProps) {
       )}
     </li>
   );
-}
+};

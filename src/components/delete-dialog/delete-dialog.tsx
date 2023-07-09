@@ -1,7 +1,5 @@
-import Dialog from '../common/dialog/dialog';
-import DialogTitle from '../common/dialog-title/dialog-title';
-import DialogActions from '../common/dialog-actions/dialog-actions';
 import { Record } from '../../common/types/record';
+import { Dialog, DialogTitle, DialogActions } from '../common/common';
 
 type DeleteDialogProps = {
   record: Record;
@@ -9,7 +7,7 @@ type DeleteDialogProps = {
   onClose: () => void;
 };
 
-export default function DeleteDialog({ record, onClose, onDelete }: DeleteDialogProps) {
+export const DeleteDialog = ({ record, onClose, onDelete }: DeleteDialogProps) => {
   const title = `Delete ${record.description?.length ? `"${record.description}"` : 'record'}?`;
   return (
     <Dialog onClose={onClose} a11yName={title}>
@@ -18,4 +16,4 @@ export default function DeleteDialog({ record, onClose, onDelete }: DeleteDialog
       <DialogActions confirmButtonText="Delete" onCancel={onClose} onConfirm={onDelete} />
     </Dialog>
   );
-}
+};

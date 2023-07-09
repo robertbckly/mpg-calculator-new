@@ -8,25 +8,22 @@ type DialogProps = {
 };
 
 /**
- * Generic Dialog that opens automatically after rendering.
- * @param `DialogProps`
+ * Generic 'modal' dialog that opens automatically after rendering.
  */
-export default function Dialog({ a11yName, children, onClose }: DialogProps) {
+export const Dialog = ({ a11yName, children, onClose }: DialogProps) => {
   const dialogElement = useRef<HTMLDialogElement>(null);
 
-  // Calling `showModal()` achieves desired behaviour vs. using `open` attribute.
+  // Using `showModal()` instead of `open` attribute in order to create
+  // a 'modal' dialog which has better a11y and keyboard control.
   useEffect(() => {
     if (!dialogElement.current?.open) {
       dialogElement.current?.showModal();
     }
   }, [dialogElement.current?.open]);
 
-  // Dialog where modal=true has native methods for closing, hence use of `onClose()`
   return (
-    <dialog ref={dialogElement} className="dialog" onClose={onClose} aria-label={a11yName}>
+    <dialog ref={dialogElement} className="dialog" aria-label={a11yName} onClose={onClose}>
       {children}
     </dialog>
   );
-}
-
-Dialog.defaultProps = { children: null };
+};

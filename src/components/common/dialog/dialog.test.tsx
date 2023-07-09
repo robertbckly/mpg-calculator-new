@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
-import Dialog from './dialog';
+import { Dialog } from './dialog';
 
 // Prevent Jest runtime error
 jest.mock('./dialog.css', () => {});

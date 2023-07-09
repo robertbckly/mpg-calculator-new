@@ -1,5 +1,5 @@
 import { Record as TRecord } from '../../common/types/record';
-import Record, { RecordProps } from './components/record/record';
+import { Record, RecordProps } from './components/record/record';
 import '../app/app.css';
 import './record-list.css';
 
@@ -8,7 +8,7 @@ export type RecordListProps = {
   onDelete: RecordProps['onDelete'];
 };
 
-export default function RecordList({ records, onDelete }: RecordListProps) {
+export const RecordList = ({ records, onDelete }: RecordListProps) => {
   const haveRecords = Boolean(records.length);
   return (
     <section className="container container--record-list" aria-label="Saved MPG calculations">
@@ -22,4 +22,4 @@ export default function RecordList({ records, onDelete }: RecordListProps) {
       )}
     </section>
   );
-}
+};
