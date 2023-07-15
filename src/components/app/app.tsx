@@ -28,7 +28,7 @@ const INIT_INPUT_DATA: RecordT = Object.freeze({
   description: null,
 });
 
-export const App = () => {
+export function App() {
   const [showSaveDialog, setShowSaveDialog] = useState(false);
   const [inputData, setInputData] = useState<RecordT>(INIT_INPUT_DATA);
   const [recordList, setRecordList] = useState<RecordT[]>([]);
@@ -119,4 +119,4 @@ export const App = () => {
       )}
     </main>
   );
-};
+}

@@ -6,7 +6,7 @@ type OutputDisplayProps = {
   ariaBusy?: boolean;
 };
 
-export const OutputDisplay = ({ data, ariaBusy }: OutputDisplayProps) => {
+export function OutputDisplay({ data, ariaBusy }: OutputDisplayProps) {
   const mpg = milesPerGallon(data);
   const cpm = costPerMile(data);
   const mpgValueString = mpg || '-- ';
@@ -27,4 +27,4 @@ export const OutputDisplay = ({ data, ariaBusy }: OutputDisplayProps) => {
       </p>
     </div>
   );
-};
+}

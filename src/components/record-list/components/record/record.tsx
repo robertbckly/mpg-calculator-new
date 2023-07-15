@@ -9,7 +9,7 @@ export type RecordProps = {
   onDelete: (id: RecordT['id']) => void;
 };
 
-export const Record = ({ recordData, onDelete }: RecordProps) => {
+export function Record({ recordData, onDelete }: RecordProps) {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
   const cpm = costPerMile(recordData);
   const mpgString = `${milesPerGallon(recordData)}mpg`;
@@ -55,4 +55,4 @@ export const Record = ({ recordData, onDelete }: RecordProps) => {
       )}
     </li>
   );
-};
+}

@@ -8,7 +8,7 @@ export type RecordListProps = {
   onDelete: RecordProps['onDelete'];
 };
 
-export const RecordList = ({ records, onDelete }: RecordListProps) => {
+export function RecordList({ records, onDelete }: RecordListProps) {
   const haveRecords = Boolean(records.length);
   return (
     <section className="container container--record-list" aria-label="Saved MPG calculations">
@@ -22,4 +22,4 @@ export const RecordList = ({ records, onDelete }: RecordListProps) => {
       )}
     </section>
   );
-};
+}

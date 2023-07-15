@@ -7,13 +7,13 @@ type DialogActionsProps = {
   onConfirm: () => void;
 };
 
-export const DialogActions = ({
+export function DialogActions({
   cancelButtonText = 'Cancel',
   confirmButtonText = 'Save',
   onCancel,
   onConfirm,
-}: DialogActionsProps) => (
-  <div className="dialog-actions">
+}: DialogActionsProps) {
+  return <div className="dialog-actions">
     <button
       type="button"
       className="dialog-actions__button dialog-actions__button--cancel"
@@ -29,4 +29,4 @@ export const DialogActions = ({
       {confirmButtonText}
     </button>
   </div>
-);
+}

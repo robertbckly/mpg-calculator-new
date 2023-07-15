@@ -9,7 +9,7 @@ type DescriptionDialogProps = {
 
 const title = 'Enter a description (optional)';
 
-export const DescriptionDialog = ({ onClose, onSubmit }: DescriptionDialogProps) => {
+export function DescriptionDialog({ onClose, onSubmit }: DescriptionDialogProps) {
   const [description, setDescription] = useState('');
 
   const handleSubmit = () => {
@@ -35,4 +35,4 @@ export const DescriptionDialog = ({ onClose, onSubmit }: DescriptionDialogProps)
       <DialogActions confirmButtonText="Save" onCancel={onClose} onConfirm={handleSubmit} />
     </Dialog>
   );
-};
+}

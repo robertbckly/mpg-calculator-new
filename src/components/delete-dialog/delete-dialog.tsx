@@ -7,7 +7,7 @@ type DeleteDialogProps = {
   onClose: () => void;
 };
 
-export const DeleteDialog = ({ record, onClose, onDelete }: DeleteDialogProps) => {
+export function DeleteDialog({ record, onClose, onDelete }: DeleteDialogProps) {
   const title = `Delete ${record.description?.length ? `"${record.description}"` : 'record'}?`;
   return (
     <Dialog onClose={onClose} a11yName={title}>
@@ -16,4 +16,4 @@ export const DeleteDialog = ({ record, onClose, onDelete }: DeleteDialogProps) =
       <DialogActions confirmButtonText="Delete" onCancel={onClose} onConfirm={onDelete} />
     </Dialog>
   );
-};
+}

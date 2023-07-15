@@ -10,7 +10,7 @@ type DialogProps = {
 /**
  * Generic 'modal' dialog that opens automatically after rendering.
  */
-export const Dialog = ({ a11yName, children, onClose }: DialogProps) => {
+export function Dialog({ a11yName, children, onClose }: DialogProps) {
   const dialogElement = useRef<HTMLDialogElement>(null);
 
   // Using `showModal()` instead of `open` attribute in order to create
@@ -26,4 +26,4 @@ export const Dialog = ({ a11yName, children, onClose }: DialogProps) => {
       {children}
     </dialog>
   );
-};
+}
