@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { Record as RecordT } from '../../../../common/types/record';
-import { costPerMile, milesPerGallon } from '../../../../common/utils/calculations';
+import { FuelRecord } from '../../../../types/fuel-record';
+import { costPerMile, milesPerGallon } from '../../../../utils/calculations';
 import { DeleteDialog } from '../../../delete-dialog/delete-dialog';
 import './record.css';
 
 export type RecordProps = {
-  recordData: RecordT;
-  onDelete: (id: RecordT['id']) => void;
+  recordData: FuelRecord;
+  onDelete: (id: FuelRecord['id']) => void;
 };
 
 export function Record({ recordData, onDelete }: RecordProps) {

@@ -1,10 +1,10 @@
-import { Record as TRecord } from '../../common/types/record';
+import { FuelRecord } from '../../types/fuel-record';
 import { Record, RecordProps } from './components/record/record';
 import '../app/app.css';
 import './record-list.css';
 
 export type RecordListProps = {
-  records: TRecord[];
+  records: FuelRecord[];
   onDelete: RecordProps['onDelete'];
 };
 

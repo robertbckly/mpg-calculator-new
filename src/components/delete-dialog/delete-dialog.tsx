@@ -1,8 +1,8 @@
-import { Record } from '../../common/types/record';
+import { FuelRecord } from '../../types/fuel-record';
 import { Dialog, DialogTitle, DialogActions } from '../common/common';
 
 type DeleteDialogProps = {
-  record: Record;
+  record: FuelRecord;
   onDelete: () => void;
   onClose: () => void;
 };

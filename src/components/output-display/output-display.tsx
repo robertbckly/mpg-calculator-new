@@ -1,8 +1,8 @@
-import { Record } from '../../common/types/record';
-import { costPerMile, milesPerGallon } from '../../common/utils/calculations';
+import { FuelRecord } from '../../types/fuel-record';
+import { costPerMile, milesPerGallon } from '../../utils/calculations';
 
 type OutputDisplayProps = {
-  data: Record;
+  data: FuelRecord;
   ariaBusy?: boolean;
 };
 

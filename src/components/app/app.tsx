@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
-import { Record as RecordT } from '../../common/types/record';
+import { FuelRecord } from '../../types/fuel-record';
 import { DescriptionDialog } from '../description-dialog/description-dialog';
 import { MainForm } from '../main-form/main-form';
 import { OutputDisplay } from '../output-display/output-display';
@@ -20,7 +20,7 @@ import './app.css';
 
 const LOCAL_STORAGE_NAME = 'recordList';
 const ARIA_BUSY_DELAY_MS = 3000;
-const INIT_INPUT_DATA: RecordT = Object.freeze({
+const INIT_INPUT_DATA: FuelRecord = Object.freeze({
   id: null,
   volume: null,
   distance: null,
@@ -30,8 +30,8 @@ const INIT_INPUT_DATA: RecordT = Object.freeze({
 
 export function App() {
   const [showSaveDialog, setShowSaveDialog] = useState(false);
-  const [inputData, setInputData] = useState<RecordT>(INIT_INPUT_DATA);
-  const [recordList, setRecordList] = useState<RecordT[]>([]);
+  const [inputData, setInputData] = useState<FuelRecord>(INIT_INPUT_DATA);
+  const [recordList, setRecordList] = useState<FuelRecord[]>([]);
   const [synced, setSynced] = useState(false);
   const [ariaBusy, setAriaBusy] = useState(false);
 
@@ -66,12 +66,12 @@ export function App() {
     if (!savingEnabled) {
       return;
     }
-    const newRecord: RecordT = { ...inputData, id: uuid(), description };
+    const newRecord: FuelRecord = { ...inputData, id: uuid(), description };
     setRecordList((records) => [newRecord, ...records]);
     resetInput();
   };
 
-  const deleteRecord = (id: RecordT['id']) => {
+  const deleteRecord = (id: FuelRecord['id']) => {
     if (!id) {
       return;
     }

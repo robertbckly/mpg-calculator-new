@@ -1,5 +1,5 @@
 import { ChangeEvent } from 'react';
-import { Record } from '../../common/types/record';
+import { FuelRecord } from '../../types/fuel-record';
 import './main-form.css';
 
 // type InputErrors = {
@@ -7,7 +7,7 @@ import './main-form.css';
 // };
 
 type MainFormProps = {
-  value: Record;
+  value: FuelRecord;
   onChange: (input: string, value: string) => void;
 };
 
