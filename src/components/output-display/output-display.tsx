@@ -1,5 +1,5 @@
 import { FuelRecord } from '../../types/fuel-record';
-import { costPerMile, milesPerGallon } from '../../utils/calculations';
+import { milesPerGallon } from '../../utils/calculations';
 
 type OutputDisplayProps = {
   data: FuelRecord;
@@ -7,10 +7,7 @@ type OutputDisplayProps = {
 };
 
 export function OutputDisplay({ data, ariaBusy }: OutputDisplayProps) {
-  const mpg = milesPerGallon(data);
-  const cpm = costPerMile(data);
-  const mpgValueString = mpg || '-- ';
-  const cpmValueString = cpm || ' -- ';
+  const mpgString = milesPerGallon(data) || '-- ';
 
   return (
     <div className="output">
@@ -20,10 +17,7 @@ export function OutputDisplay({ data, ariaBusy }: OutputDisplayProps) {
         aria-atomic
         aria-busy={ariaBusy}
       >
-        <span className="text-wrap">{mpgValueString}</span>mpg
-      </p>
-      <p className="output-item">
-        £<span className="text-wrap">{cpmValueString}</span> per mile
+        <span className="text-wrap">{mpgString}</span>mpg
       </p>
     </div>
   );

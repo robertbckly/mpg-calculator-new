@@ -9,7 +9,6 @@ import './app.css';
 
 /**
  * -- TODO --
- * -> Rename `Record` type to avoid collision with TypeScript utility type
  * -> Add record editing (load into calculator; fields populated; saving overwrites)
  * -> Add feedback for invalid input
  * -> Check aria announcement has been implemented properly (maybe use off-screen announcement text?)
@@ -18,13 +17,14 @@ import './app.css';
  * --      --
  */
 
+// Move these into a `config` object and import?
 const LOCAL_STORAGE_NAME = 'recordList';
 const ARIA_BUSY_DELAY_MS = 3000;
+
 const INIT_INPUT_DATA: FuelRecord = Object.freeze({
   id: null,
   volume: null,
   distance: null,
-  cost: null,
   description: null,
 });
 
@@ -82,7 +82,7 @@ export function App() {
     // Needs runtime validation (using browser APIs)
     // ...don't set state if invalid
     let castValue: string | number = value;
-    if (input === 'volume' || input === 'distance' || input === 'cost') {
+    if (input === 'volume' || input === 'distance') {
       castValue = Number(value);
     }
     setInputData((data) => ({ ...data, [input]: castValue }));

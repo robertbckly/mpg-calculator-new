@@ -47,18 +47,6 @@ export function MainForm({ value, onChange }: MainFormProps) {
           onChange={handleInputChange}
         />
       </label>
-      <label htmlFor="cost" className="main-form__label">
-        Cost (£)
-        <input
-          className="main-form__input"
-          type="number"
-          name="cost"
-          step={0.01}
-          min={0}
-          value={value.cost || ''}
-          onChange={handleInputChange}
-        />
-      </label>
     </form>
   );
 }
