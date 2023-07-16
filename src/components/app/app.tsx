@@ -9,6 +9,8 @@ import './app.css';
 
 /**
  * -- TODO --
+ * -> Extract localStorage logic into hook
+ * -> Add expression parsing in miles field... so that I can do (end - start)
  * -> Add record editing (load into calculator; fields populated; saving overwrites)
  * -> Add feedback for invalid input
  * -> Check aria announcement has been implemented properly (maybe use off-screen announcement text?)
