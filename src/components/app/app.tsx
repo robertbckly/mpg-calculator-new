@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { FuelRecord } from '../../types/fuel-record';
+import { useLocalStorage } from '../../hooks/use-local-storage-sync';
 import { DescriptionDialog } from '../description-dialog/description-dialog';
 import { MainForm } from '../main-form/main-form';
 import { OutputDisplay } from '../output-display/output-display';
@@ -9,7 +10,7 @@ import './app.css';
 
 /**
  * -- TODO --
- * -> Extract localStorage logic into hook
+ * -> Add loading context to prevent user input app-wide
  * -> Add expression parsing in miles field... so that I can do (end - start)
  * -> Add record editing (load into calculator; fields populated; saving overwrites)
  * -> Add feedback for invalid input
@@ -31,27 +32,31 @@ const INIT_INPUT_DATA: FuelRecord = Object.freeze({
 });
 
 export function App() {
-  const [showSaveDialog, setShowSaveDialog] = useState(false);
+  // Don't like this Prettier formatting...
+  const [savedData, loadingSavedData, updateSavedData] =
+    useLocalStorage<FuelRecord[]>(LOCAL_STORAGE_NAME);
   const [inputData, setInputData] = useState<FuelRecord>(INIT_INPUT_DATA);
   const [recordList, setRecordList] = useState<FuelRecord[]>([]);
   const [synced, setSynced] = useState(false);
+  const [showSaveDialog, setShowSaveDialog] = useState(false);
   const [ariaBusy, setAriaBusy] = useState(false);
 
   const savingEnabled = Boolean(inputData.volume && inputData.distance);
 
-  useEffect(() => {
-    // Sync state with storage on first load
-    if (!synced) {
-      const serialisedRecords = window.localStorage.getItem(LOCAL_STORAGE_NAME);
-      if (serialisedRecords?.length) {
-        setRecordList(JSON.parse(serialisedRecords));
-      }
-      setSynced(true);
-    } else {
-      // Sync storage with state on change
-      window.localStorage.setItem(LOCAL_STORAGE_NAME, JSON.stringify(recordList));
+  // Initial load from localStorage
+  if (!loadingSavedData && !synced) {
+    if (Array.isArray(savedData)) {
+      setRecordList(savedData);
     }
-  }, [synced, recordList]);
+    setSynced(true);
+  }
+
+  // Save any changes to localStorage
+  useEffect(() => {
+    if (synced) {
+      updateSavedData(recordList);
+    }
+  }, [recordList, synced, updateSavedData]);
 
   // Delay ARIA announcement until after last input
   useEffect(() => {

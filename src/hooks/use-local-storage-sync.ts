@@ -1,27 +1,29 @@
 import { useEffect, useState } from 'react';
 
-// This didn't go so well...
-// need to consider how this plays with existing state in the consumer
-
-export function useLocalStorageSync(objectName: string) {
-  const [data, setData] = useState<any>();
+/**
+ * Read/write to a named localStorage entry.
+ *
+ * Note: this hook doesn't guarantee type safety. If the localStorage entry
+ * has been unexpectedly mutated, then `data` might be a different type.
+ *
+ * @param storeName
+ * @returns `[data, loading, update]`
+ */
+export function useLocalStorage<T extends any>(storeName: string) {
+  const [data, setData] = useState<T>();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Initial sync
-    if (typeof data === 'undefined') {
-      const serialisedObject = window.localStorage.getItem(objectName);
-      if (serialisedObject?.length) {
-        setData(JSON.parse(serialisedObject));
-      } else {
-        // Set `null` to show that store has been checked and nothing found
-        setData(null);
-      }
+    const serialisedValue = window.localStorage.getItem(storeName);
+    if (typeof serialisedValue === 'string') {
+      setData(JSON.parse(serialisedValue));
     }
-  }, [data, objectName]);
+    setLoading(false);
+  }, [storeName]);
 
-  function updateLocalStorage(newValue: any) {
-    window.localStorage.setItem(objectName, JSON.stringify(newValue));
+  function update(newValue: T) {
+    window.localStorage.setItem(storeName, JSON.stringify(newValue));
   }
 
-  return [data, updateLocalStorage];
+  return [data, loading, update] as const;
 }
