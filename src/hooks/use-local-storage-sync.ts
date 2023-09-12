@@ -13,6 +13,7 @@ export function useLocalStorage<T extends any>(storeName: string) {
   const [data, setData] = useState<T>();
   const [loading, setLoading] = useState(true);
 
+  // Get value and parse it if it's a string.
   useEffect(() => {
     const serialisedValue = window.localStorage.getItem(storeName);
     if (typeof serialisedValue === 'string') {

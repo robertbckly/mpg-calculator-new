@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { FuelRecord } from '../../types/fuel-record';
+import { ARIA_BUSY_DELAY_MS, LOCAL_STORAGE_NAME } from '../../constants/constants';
 import { useLocalStorage } from '../../hooks/use-local-storage-sync';
 import { DescriptionDialog } from '../description-dialog/description-dialog';
 import { MainForm } from '../main-form/main-form';
@@ -20,10 +21,6 @@ import './app.css';
  * --      --
  */
 
-// Move these into a `config` object and import?
-const LOCAL_STORAGE_NAME = 'recordList';
-const ARIA_BUSY_DELAY_MS = 3000;
-
 const INIT_INPUT_DATA: FuelRecord = Object.freeze({
   id: null,
   volume: null,
@@ -32,7 +29,6 @@ const INIT_INPUT_DATA: FuelRecord = Object.freeze({
 });
 
 export function App() {
-  // Don't like this Prettier formatting...
   const [savedData, loadingSavedData, updateSavedData] =
     useLocalStorage<FuelRecord[]>(LOCAL_STORAGE_NAME);
   const [inputData, setInputData] = useState<FuelRecord>(INIT_INPUT_DATA);
