@@ -9,11 +9,11 @@ import { useEffect, useState } from 'react';
  * @param storeName
  * @returns `[data, loading, update]`
  */
-export function useLocalStorage<T extends any>(storeName: string) {
-  const [data, setData] = useState<T>();
+export function useLocalStorage<TData extends any>(storeName: string) {
+  const [data, setData] = useState<TData>();
   const [loading, setLoading] = useState(true);
 
-  // Get value and parse it if it's a string.
+  // Get value and parse if it's a string.
   useEffect(() => {
     const serialisedValue = window.localStorage.getItem(storeName);
     if (typeof serialisedValue === 'string') {
@@ -22,7 +22,7 @@ export function useLocalStorage<T extends any>(storeName: string) {
     setLoading(false);
   }, [storeName]);
 
-  function update(newValue: T) {
+  function update(newValue: TData) {
     window.localStorage.setItem(storeName, JSON.stringify(newValue));
   }
 
