@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FuelRecord } from '../../../../types/fuel-record';
+import { FuelRecord } from '../../../../types/types';
 import { milesPerGallon } from '../../../../utils/calculations';
 import { DeleteDialog } from '../../../delete-dialog/delete-dialog';
 import './record.css';
@@ -11,7 +11,10 @@ export type RecordProps = {
 
 export function Record({ recordData, onDelete }: RecordProps) {
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-  const mpgString = `${milesPerGallon(recordData)}mpg`;
+  const mpgString = `${milesPerGallon(
+    recordData.distance,
+    recordData.volume
+  )}mpg`;
 
   const handleDialogClose = () => {
     setShowDeleteDialog(false);
@@ -28,6 +31,9 @@ export function Record({ recordData, onDelete }: RecordProps) {
         {recordData.description && (
           <h2 className="record__description">{recordData.description}</h2>
         )}
+        <p>
+          {recordData.distance}mi / {recordData.volume}L{' '}
+        </p>
         <p className="record__data">{mpgString}</p>
       </div>
 

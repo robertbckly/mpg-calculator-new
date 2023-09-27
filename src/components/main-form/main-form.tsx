@@ -1,50 +1,54 @@
 import { ChangeEvent } from 'react';
-import { FuelRecord } from '../../types/fuel-record';
+import { FuelForm } from '../../types/types';
 import './main-form.css';
 
-// type InputErrors = {
-//   [field in keyof Record]?: boolean;
-// };
+const INPUT_CSS_CLASS_NAME = 'main-form__input';
 
-type MainFormProps = {
-  value: FuelRecord;
-  onChange: (input: string, value: string) => void;
+const getInputClassName = (error?: boolean) =>
+  INPUT_CSS_CLASS_NAME + (error ? ` ${INPUT_CSS_CLASS_NAME}--error` : '');
+
+export type MainFormProps = {
+  form: FuelForm;
+  onChange: <K extends keyof FuelForm>(
+    inputField: K,
+    inputData: FuelForm[K]
+  ) => void;
 };
 
-export function MainForm({ value, onChange }: MainFormProps) {
-  // const [errors, setErrors] = useState<InputErrors>({});
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+export function MainForm({ form, onChange }: MainFormProps) {
+  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     const input = e.target;
-    onChange(input.name, input.value);
-    // const isValid = input.checkValidity();
-    // setErrors((currentErrors) => ({ ...currentErrors, [e.target.name]: !isValid }));
+    // Safe to assume type of `input.name` as it's defined in JSX below
+    onChange(input.name as keyof Omit<FuelForm, 'id'>, {
+      value: input.value,
+      error: input.checkValidity() === false,
+    });
   };
 
   return (
-    <form className="main-form" onSubmit={(e) => e.preventDefault()}>
+    <form className="main-form" onSubmit={(event) => event.preventDefault()}>
       <label htmlFor="volume" className="main-form__label">
         Litres *
         <input
-          className="main-form__input"
+          className={getInputClassName(form.volume.error)}
           type="number"
           name="volume"
           step={0.01}
           min={0}
-          value={value.volume || ''}
-          onChange={handleInputChange}
+          value={form.volume.value ?? ''}
+          onInput={handleInput}
         />
       </label>
       <label htmlFor="distance" className="main-form__label">
         Miles *
         <input
-          className="main-form__input"
+          className={getInputClassName(form.distance.error)}
           type="number"
           name="distance"
           step={0.01}
           min={0}
-          value={value.distance || ''}
-          onChange={handleInputChange}
+          value={form.distance.value ?? ''}
+          onInput={handleInput}
         />
       </label>
     </form>

@@ -19,3 +19,7 @@
   background-color: black;
   color: white;
 }
+
+.main-form__input--error {
+  border: 2px solid rgb(238, 70, 70);
+}

@@ -1,4 +1,4 @@
-import { FuelRecord } from '../../types/fuel-record';
+import { FuelRecord } from '../../types/types';
 import { Dialog, DialogTitle, DialogActions } from '../common/common';
 
 type DeleteDialogProps = {
@@ -8,12 +8,18 @@ type DeleteDialogProps = {
 };
 
 export function DeleteDialog({ record, onClose, onDelete }: DeleteDialogProps) {
-  const title = `Delete ${record.description?.length ? `"${record.description}"` : 'record'}?`;
+  const title = `Delete ${
+    record.description?.length ? `"${record.description}"` : 'record'
+  }?`;
   return (
     <Dialog onClose={onClose} a11yName={title}>
       <DialogTitle>{title}</DialogTitle>
       <br />
-      <DialogActions confirmButtonText="Delete" onCancel={onClose} onConfirm={onDelete} />
+      <DialogActions
+        confirmButtonText="Delete"
+        onCancel={onClose}
+        onConfirm={onDelete}
+      />
     </Dialog>
   );
 }

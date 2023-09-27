@@ -1,13 +1,17 @@
-import { FuelRecord } from '../../types/fuel-record';
+import { FuelForm } from '../../types/types';
 import { milesPerGallon } from '../../utils/calculations';
 
 type OutputDisplayProps = {
-  data: FuelRecord;
+  data: FuelForm;
   ariaBusy?: boolean;
 };
 
 export function OutputDisplay({ data, ariaBusy }: OutputDisplayProps) {
-  const mpgString = milesPerGallon(data) || '-- ';
+  const mpgString =
+    milesPerGallon(
+      Number(data.distance.value) || 0,
+      Number(data.volume.value) || 0
+    ) || '-- ';
 
   return (
     <div className="output">
