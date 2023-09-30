@@ -14,7 +14,6 @@ import './app.css';
 
 /**
  * -- TODO --
- * -> Rename `DescriptionDialog` to `SaveDialog`
  * -> Add expression parsing in miles field... so that I can do (end - start)
  * -> Check aria announcement has been implemented properly (maybe use off-screen announcement text?)
  * -> Improve UI + UX
