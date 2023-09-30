@@ -9,7 +9,7 @@ import { useLocalStorage } from '../../hooks/use-local-storage-sync';
 import { MainForm, MainFormProps } from '../main-form/main-form';
 import { OutputDisplay } from '../output-display/output-display';
 import { RecordList } from '../record-list/record-list';
-import { SaveDialog } from '../save-dialog/save-dialog';
+import { SaveDialog } from '../dialogs/dialogs';
 import './app.css';
 
 /**

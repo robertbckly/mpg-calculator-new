@@ -1,4 +1,4 @@
-import { FuelRecord } from '../../types/types';
+import { FuelRecord } from '../../../types/types';
 import { Dialog, DialogTitle, DialogActions } from '../common/common';
 
 type DeleteDialogProps = {

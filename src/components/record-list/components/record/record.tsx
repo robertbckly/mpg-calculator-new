@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FuelRecord } from '../../../../types/types';
 import { milesPerGallon } from '../../../../utils/utils';
-import { DeleteDialog } from '../../../delete-dialog/delete-dialog';
+import { DeleteDialog } from '../../../dialogs/dialogs';
 import './record.css';
 
 export type RecordProps = {
