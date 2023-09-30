@@ -1,15 +1,15 @@
 import { KeyboardEvent, useState } from 'react';
 import { Dialog, DialogTitle, DialogActions } from '../common/common';
-import './description-dialog.css';
+import './save-dialog.css';
 
-type DescriptionDialogProps = {
+const TITLE = 'Enter a description (optional)';
+
+type SaveDialogProps = {
   onSubmit: (description: string) => void;
   onClose: () => void;
 };
 
-const title = 'Enter a description (optional)';
-
-export function DescriptionDialog({ onClose, onSubmit }: DescriptionDialogProps) {
+export function SaveDialog({ onClose, onSubmit }: SaveDialogProps) {
   const [description, setDescription] = useState('');
 
   const handleSubmit = () => {
@@ -23,8 +23,8 @@ export function DescriptionDialog({ onClose, onSubmit }: DescriptionDialogProps)
   };
 
   return (
-    <Dialog onClose={onClose} a11yName={title}>
-      <DialogTitle>{title}</DialogTitle>
+    <Dialog onClose={onClose} a11yName={TITLE}>
+      <DialogTitle>{TITLE}</DialogTitle>
       <input
         type="text"
         className="description-dialog__input"
@@ -32,7 +32,11 @@ export function DescriptionDialog({ onClose, onSubmit }: DescriptionDialogProps)
         onChange={(event) => setDescription(event.target.value)}
         onKeyDown={handleKeyDown}
       />
-      <DialogActions confirmButtonText="Save" onCancel={onClose} onConfirm={handleSubmit} />
+      <DialogActions
+        confirmButtonText="Save"
+        onCancel={onClose}
+        onConfirm={handleSubmit}
+      />
     </Dialog>
   );
 }

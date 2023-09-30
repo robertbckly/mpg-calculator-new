@@ -6,15 +6,15 @@ import {
   LOCAL_STORAGE_NAME,
 } from '../../constants/constants';
 import { useLocalStorage } from '../../hooks/use-local-storage-sync';
-import { DescriptionDialog } from '../description-dialog/description-dialog';
 import { MainForm, MainFormProps } from '../main-form/main-form';
 import { OutputDisplay } from '../output-display/output-display';
 import { RecordList } from '../record-list/record-list';
+import { SaveDialog } from '../save-dialog/save-dialog';
 import './app.css';
 
 /**
  * -- TODO --
- * -> Add loading context to prevent user input app-wide
+ * -> Rename `DescriptionDialog` to `SaveDialog`
  * -> Add expression parsing in miles field... so that I can do (end - start)
  * -> Check aria announcement has been implemented properly (maybe use off-screen announcement text?)
  * -> Improve UI + UX
@@ -125,7 +125,7 @@ export function App() {
       <RecordList records={recordList} onDelete={(id) => deleteRecord(id)} />
 
       {showSaveDialog && (
-        <DescriptionDialog
+        <SaveDialog
           onSubmit={handleSaveConfirmation}
           onClose={() => setShowSaveDialog(false)}
         />
