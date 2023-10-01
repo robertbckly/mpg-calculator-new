@@ -16,6 +16,7 @@ import './app.css';
  * -- TODO --
  * -> Add expression parsing in miles field... so that I can do (end - start)
  * -> Check aria announcement has been implemented properly (maybe use off-screen announcement text?)
+ * ->   ^ Is aria-busy via state an appropriate model? Perhaps use a ref.
  * -> Improve UI + UX
  * -> Build + deploy
  * --      --
@@ -50,12 +51,10 @@ export function App() {
     setSynced(true);
   }
 
-  // Save any changes to localStorage
-  useEffect(() => {
-    if (synced) {
-      updateSavedData(recordList);
-    }
-  }, [recordList, synced, updateSavedData]);
+  // Save any changes to `recordList` to localStorage
+  if (synced && savedData !== recordList) {
+    updateSavedData(recordList);
+  }
 
   // Delay ARIA announcement until after last input
   useEffect(() => {
