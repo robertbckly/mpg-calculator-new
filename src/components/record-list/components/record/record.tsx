@@ -28,13 +28,10 @@ export function Record({ recordData, onDelete }: RecordProps) {
   return (
     <li className="record">
       <div>
-        {recordData.description && (
-          <h2 className="record__description">{recordData.description}</h2>
-        )}
-        <p>
-          {recordData.distance}mi / {recordData.volume}L{' '}
+        <p className="record__data">
+          {mpgString} ({recordData.distance}mi / {recordData.volume}L)
         </p>
-        <p className="record__data">{mpgString}</p>
+        <p> {recordData.description}</p>
       </div>
 
       <button
