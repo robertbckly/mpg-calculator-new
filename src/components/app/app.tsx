@@ -70,10 +70,23 @@ export function App() {
     if (!canSave) {
       return;
     }
+
+    let distance: number;
+
+    // Note: this is a fail-safe. The distance input will have already been
+    // parsed by `MainForm` and any error already caught, preventing the user
+    // from saving the record. This means that this function could never be
+    // called, and an error never thrown by `parseDistanceInput()`.
+    try {
+      distance = parseDistanceInput(form.distance.value);
+    } catch {
+      distance = 0;
+    }
+
     const newRecord: FuelRecord = {
       id: uuid(),
       description,
-      distance: parseDistanceInput(form.distance.value),
+      distance,
       volume: Number(form.volume.value) || 0,
     };
     // Prepend to `recordList`
