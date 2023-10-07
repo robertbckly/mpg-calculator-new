@@ -67,6 +67,11 @@ it('converts complex input with x2 trailing `.` to number', () => {
   expect(parseDistanceInput('42. - 21.')).toBe(21);
 });
 
+it('avoids floating-point precision error', () => {
+  // Expression typically doesn't evaluate to `0.2` unless using `toFixed()`
+  expect(parseDistanceInput('0.3 - 0.1')).toBe(0.2);
+});
+
 it('throws error when simple input is invalid', () => {
   expect(() => {
     parseDistanceInput('abc');

@@ -34,5 +34,10 @@ export const parseDistanceInput = (input: string | null): number => {
   }
 
   // 'Complex' expression
-  return Math.abs(Number(parsedOperands[0]) - Number(parsedOperands[1]));
+  const result = Math.abs(
+    Number(parsedOperands[0]) - Number(parsedOperands[1])
+  );
+
+  // Avoid precision error
+  return Number(result.toFixed(2));
 };
