@@ -15,7 +15,6 @@ import './app.css';
 
 /**
  * -- TODO --
- * -> Build + deploy
  * -> Move form to non-controlled inputs, using FormData API ?
  * --      --
  */
