@@ -2,3 +2,5 @@
 /.vscode
 /node_modules
 /coverage
+# Remove /dist when committing a new build
+/dist
