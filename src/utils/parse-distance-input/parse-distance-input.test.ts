@@ -89,3 +89,9 @@ it('throws error when right operand is invalid', () => {
     parseDistanceInput('123 - abc');
   }).toThrow();
 });
+
+it('throws error when there are too many operands', () => {
+  expect(() => {
+    parseDistanceInput('123 - 456 - 789');
+  }).toThrow();
+});

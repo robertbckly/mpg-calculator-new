@@ -17,6 +17,11 @@ export const parseDistanceInput = (input: string | null): number => {
   const operands = input.split('-');
   const parsedOperands: number[] = [];
 
+  // Only supporting subtraction between two numbers
+  if (operands.length > 2) {
+    throw new Error('Too many operands');
+  }
+
   // Parse string `operands`
   operands.forEach((operand, index) => {
     const parsedOperand = Number(operand.trim());
