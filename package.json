@@ -1,8 +1,8 @@
 {
-  "name": "fuel-calculator",
+  "name": "mpg-calculator",
   "version": "1.0.0",
   "repository": "git@github.com:robertbckly/fuel-calculator.git",
-  "author": "Robert Buckley <robqhd@gmail.com>",
+  "author": "Robert Buckley <robertbckly@gmail.com>",
   "license": "",
   "private": true,
   "source": "src/index.html",
