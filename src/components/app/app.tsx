@@ -6,6 +6,7 @@ import {
   LOCAL_STORAGE_NAME,
 } from '../../constants/constants';
 import { useLocalStorage } from '../../hooks/use-local-storage-sync';
+import { parseDistanceInput } from '../../utils/utils';
 import { MainForm, MainFormProps } from '../main-form/main-form';
 import { OutputDisplay } from '../output-display/output-display';
 import { RecordList } from '../record-list/record-list';
@@ -14,9 +15,11 @@ import './app.css';
 
 /**
  * -- TODO --
+ * -> Move form to non-controlled inputs, using FormData API ?
  * -> Add expression parsing in miles field... so that I can do (end - start)
  * -> Check aria announcement has been implemented properly (maybe use off-screen announcement text?)
  * ->   ^ Is aria-busy via state an appropriate model? Perhaps use a ref.
+ * ->   ^ also see https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions#roles_with_implicit_live_region_attributes
  * -> Improve UI + UX
  * -> Build + deploy
  * --      --
@@ -70,7 +73,7 @@ export function App() {
     const newRecord: FuelRecord = {
       id: uuid(),
       description,
-      distance: Number(form.distance.value) || 0,
+      distance: parseDistanceInput(form.distance.value),
       volume: Number(form.volume.value) || 0,
     };
     // Prepend to `recordList`

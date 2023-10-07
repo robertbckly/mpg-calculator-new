@@ -1,5 +1,5 @@
 import { FuelForm } from '../../types/types';
-import { milesPerGallon } from '../../utils/utils';
+import { milesPerGallon, parseDistanceInput } from '../../utils/utils';
 
 type OutputDisplayProps = {
   data: FuelForm;
@@ -7,8 +7,16 @@ type OutputDisplayProps = {
 };
 
 export function OutputDisplay({ data, ariaBusy }: OutputDisplayProps) {
-  const distance = Number(data.distance.value) || 0;
   const volume = Number(data.volume.value) || 0;
+
+  let distance: number;
+
+  try {
+    distance = parseDistanceInput(data.distance.value);
+  } catch {
+    distance = 0;
+  }
+
   const mpgString = milesPerGallon(distance, volume) || '-- ';
 
   return (
