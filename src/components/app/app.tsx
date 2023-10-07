@@ -10,18 +10,13 @@ import { parseDistanceInput } from '../../utils/utils';
 import { MainForm, MainFormProps } from '../main-form/main-form';
 import { OutputDisplay } from '../output-display/output-display';
 import { RecordList } from '../record-list/record-list';
-import { SaveDialog } from '../dialogs/dialogs';
+import { HelpDialog, SaveDialog } from '../dialogs/dialogs';
 import './app.css';
 
 /**
  * -- TODO --
- * -> Move form to non-controlled inputs, using FormData API ?
- * -> Add expression parsing in miles field... so that I can do (end - start)
- * -> Check aria announcement has been implemented properly (maybe use off-screen announcement text?)
- * ->   ^ Is aria-busy via state an appropriate model? Perhaps use a ref.
- * ->   ^ also see https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions#roles_with_implicit_live_region_attributes
- * -> Improve UI + UX
  * -> Build + deploy
+ * -> Move form to non-controlled inputs, using FormData API ?
  * --      --
  */
 
@@ -36,6 +31,7 @@ export function App() {
   const [form, setForm] = useState<FuelForm>(INIT_FORM_DATA);
   const [recordList, setRecordList] = useState<FuelRecord[]>([]);
   const [synced, setSynced] = useState(false);
+  const [showHelpDialog, setShowHelpDialog] = useState(false);
   const [showSaveDialog, setShowSaveDialog] = useState(false);
   const [ariaBusy, setAriaBusy] = useState(false);
 
@@ -118,25 +114,45 @@ export function App() {
   };
 
   return (
-    <main>
-      <section
-        className="container container--calculator"
-        aria-label="MPG calculator"
-      >
-        <MainForm form={form} onChange={handleMainFormChange} />
-        <OutputDisplay data={form} ariaBusy={ariaBusy} />
-
+    <>
+      <header>
+        <h1>
+          MPG Calculator <span>UK</span>
+        </h1>
         <button
           type="button"
-          disabled={!canSave}
-          className="save-button"
-          onClick={() => setShowSaveDialog(true)}
+          className="help-button"
+          aria-label="Get more information about this app"
+          onClick={() => setShowHelpDialog(true)}
         >
-          Save
+          ?
         </button>
-      </section>
+      </header>
 
-      <RecordList records={recordList} onDelete={(id) => deleteRecord(id)} />
+      <main>
+        <section
+          className="container container--calculator"
+          aria-label="MPG calculator"
+        >
+          <MainForm form={form} onChange={handleMainFormChange} />
+          <OutputDisplay data={form} ariaBusy={ariaBusy} />
+
+          <button
+            type="button"
+            disabled={!canSave}
+            className="save-button"
+            onClick={() => setShowSaveDialog(true)}
+          >
+            Save
+          </button>
+        </section>
+
+        <RecordList records={recordList} onDelete={(id) => deleteRecord(id)} />
+      </main>
+
+      {showHelpDialog && (
+        <HelpDialog onClose={() => setShowHelpDialog(false)} />
+      )}
 
       {showSaveDialog && (
         <SaveDialog
@@ -144,6 +160,6 @@ export function App() {
           onClose={() => setShowSaveDialog(false)}
         />
       )}
-    </main>
+    </>
   );
 }

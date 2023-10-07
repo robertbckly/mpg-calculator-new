@@ -1,0 +1,13 @@
+.help-dialog__para {
+  line-height: 150%;
+}
+
+.author-link {
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+}
+
+.author-link:hover {
+  text-decoration: underline;
+}
