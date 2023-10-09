@@ -2,4 +2,5 @@
   margin: 0;
   font-size: 1rem;
   font-weight: bold;
+  overflow-wrap: break-word;
 }

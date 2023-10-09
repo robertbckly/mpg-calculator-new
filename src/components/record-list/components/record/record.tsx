@@ -31,7 +31,7 @@ export function Record({ recordData, onDelete }: RecordProps) {
         <p className="record__data">
           {mpgString} ({recordData.distance}mi / {recordData.volume}L)
         </p>
-        <p> {recordData.description}</p>
+        <p className="record__desc">{recordData.description}</p>
       </div>
 
       <button
