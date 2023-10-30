@@ -1,0 +1,45 @@
+name: 'Test > Build > Deploy'
+
+on: workflow_dispatch
+
+jobs:
+  test_and_build:
+    name: Test & Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node (LTS)
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts
+      - name: Install deps
+        run: npm ci
+      - name: Test
+        run: npm test
+      - name: Build
+        run: npm run build
+      - name: Upload build to GitHub Pages
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: dist
+
+  deploy:
+    name: Deploy build to GitHub Pages
+    needs: test_and_build
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v3
+      - name: Deploy build to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
