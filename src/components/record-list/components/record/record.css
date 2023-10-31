@@ -26,6 +26,7 @@
   --size: 2rem;
   width: var(--size);
   height: var(--size);
+  flex-shrink: 0;
   padding: 0.5rem;
   border: none;
   border-radius: 50%;
