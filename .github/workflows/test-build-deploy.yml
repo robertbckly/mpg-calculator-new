@@ -16,12 +16,7 @@ jobs:
       - name: Install deps
         run: npm ci
       - name: Test
-        run: |
-          npx jest
-          $jest_exit_code=$?
-          if [ $jest_exit_code -eq 0 ]; then
-            exit 1
-          fi
+        run: npm test
       - name: Build
         run: npm run build
       - name: Upload build to GitHub Pages
