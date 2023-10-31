@@ -17,7 +17,7 @@ jobs:
         run: npm ci
       - name: Test
         run: |
-          npm test
+          npx test
           $jest_exit_code=$?
           if [ $jest_exit_code -eq 0 ]; then
             exit 1
