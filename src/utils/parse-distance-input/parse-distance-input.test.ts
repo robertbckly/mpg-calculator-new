@@ -9,7 +9,6 @@ import { parseDistanceInput } from './parse-distance-input';
 
 it('converts `null` input to 0', () => {
   expect(parseDistanceInput(null)).toBe(0);
-  throw Error();
 });
 
 it('converts empty string input to 0', () => {
