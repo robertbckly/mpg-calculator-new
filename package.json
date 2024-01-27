@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "start": "parcel",
-    "build": "parcel build --public-url ./",
+    "build": "parcel build src/index.tsx --public-url ./",
     "test": "jest",
     "coverage": "jest --coverage"
   },
