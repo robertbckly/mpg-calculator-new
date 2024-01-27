@@ -4,7 +4,7 @@
   "repository": "git@github.com:robertbckly/fuel-calculator.git",
   "author": "Robert Buckley <robertbckly@gmail.com>",
   "license": "",
-  "private": true,
+  "private": false,
   "source": "src/index.html",
   "files": [
     "dist"
