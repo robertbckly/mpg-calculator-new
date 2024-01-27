@@ -7,7 +7,7 @@
   "private": false,
   "source": "src/index.html",
   "files": [
-    "dist"
+    "dist/*"
   ],
   "scripts": {
     "start": "parcel",
