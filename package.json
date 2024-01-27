@@ -1,11 +1,14 @@
 {
-  "name": "mpg-calculator",
+  "name": "@robertbckly/mpg-calculator",
   "version": "1.0.0",
   "repository": "git@github.com:robertbckly/fuel-calculator.git",
   "author": "Robert Buckley <robertbckly@gmail.com>",
   "license": "",
   "private": true,
   "source": "src/index.html",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "start": "parcel",
     "build": "parcel build --public-url ./",
