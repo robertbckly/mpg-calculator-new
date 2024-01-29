@@ -1,0 +1,13 @@
+name: Deploy to DigitalOcean App Platform
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    name: Deploy to DigitalOcean App Platform
+    runs-on: ubuntu-latest
+    steps:
+      - uses: digitalocean/app_action@v1.1.6
+        with:
+          app_name: mpg-calculator
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
