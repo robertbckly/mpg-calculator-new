@@ -2,6 +2,9 @@ name: Build
 
 on: workflow_call
 
+concurrency:
+  group: build-group
+
 jobs:
   build:
     name: Build

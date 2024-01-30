@@ -2,6 +2,9 @@ name: Create package
 
 on: workflow_dispatch
 
+concurrency:
+  group: build-group
+
 jobs:
   build:
     name: Build

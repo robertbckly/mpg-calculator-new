@@ -2,6 +2,9 @@ name: Deploy to Cloudflare Pages
 
 on: workflow_dispatch
 
+concurrency:
+  group: build-group
+
 jobs:
   build:
     name: Build
