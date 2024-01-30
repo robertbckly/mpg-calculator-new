@@ -1,0 +1,19 @@
+name: Deploy to Cloudflare Pages
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    name: Build
+    uses: robertbckly/mpg-calculator-new/.github/workflows/build.yml@main
+  deploy:
+    name: Publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cloudflare Pages GitHub Action
+        uses: cloudflare/pages-action@v1.5.0
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: 495d6e54a024f90d5ab36bcabd41ab33
+          projectName: mpg-calculator
+          directory: dist
