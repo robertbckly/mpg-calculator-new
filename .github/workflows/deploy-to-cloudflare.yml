@@ -16,13 +16,13 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: mpg-calc-build
-          path: /
+          path: download
       - name: Unzip build
-        run: unzip mpg-calc-build -d ./extracted
+        run: unzip download/mpg-calc-build -d ./extracted
       - name: Cloudflare Pages GitHub Action
         uses: cloudflare/pages-action@v1.5.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: 495d6e54a024f90d5ab36bcabd41ab33
           projectName: mpg-calculator
-          directory: mpg-calc-build/extracted
+          directory: download/mpg-calc-build/extracted
