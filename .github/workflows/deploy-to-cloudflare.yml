@@ -2,9 +2,6 @@ name: Deploy to Cloudflare Pages
 
 on: workflow_dispatch
 
-concurrency:
-  group: build-group
-
 jobs:
   build:
     name: Build
@@ -12,6 +9,8 @@ jobs:
   deploy:
     name: Publish
     runs-on: ubuntu-latest
+    concurrency:
+      group: build-group
     steps:
       - name: Download build
         uses: actions/download-artifact@v4
