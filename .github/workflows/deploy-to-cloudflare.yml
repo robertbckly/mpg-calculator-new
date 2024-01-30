@@ -16,6 +16,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: mpg-calc-build
+          path: /
       - name: Unzip build
         run: unzip mpg-calc-build -d ./extracted
       - name: Cloudflare Pages GitHub Action
