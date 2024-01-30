@@ -12,6 +12,7 @@
   "scripts": {
     "start": "parcel",
     "build": "parcel build src/index.tsx --public-url ./",
+    "build-site": "parcel build --public-url ./",
     "test": "jest",
     "coverage": "jest --coverage"
   },
