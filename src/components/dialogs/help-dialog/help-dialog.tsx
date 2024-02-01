@@ -54,6 +54,8 @@ export function HelpDialog({ onClose }: HelpDialogProps) {
         can&apos;t be accessed between devices.
       </p>
 
+      <p className="help-dialog__para">-- Test edit, please ignore. --</p>
+
       <br />
 
       <DialogActions confirmButtonText="Close" onConfirm={onClose} />
