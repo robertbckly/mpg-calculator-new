@@ -3,14 +3,8 @@ name: Create package
 on: workflow_dispatch
 
 jobs:
-  build:
-    name: Build
-    uses: ./.github/workflows/build.yml
-    with:
-      build-command: build-site
-  publish:
-    name: Publish package to GitHub
-    needs: build
+  build-and-publish:
+    name: Build and publish package
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -18,6 +12,9 @@ jobs:
         with:
           node-version: lts/*
           registry-url: 'https://npm.pkg.github.com'
+      - uses: ./.github/workflows/build.yml
+        with:
+          build-command: build-site
       - name: Publish to package registry
         run: npm publish
         env:
