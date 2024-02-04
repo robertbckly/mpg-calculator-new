@@ -2,15 +2,13 @@ name: Create package
 
 on: workflow_dispatch
 
-concurrency:
-  group: build-group
-
 jobs:
   build:
     name: Build
-    uses: robertbckly/mpg-calculator-new/.github/workflows/build.yml@main
+    uses: ./.github/workflows/build.yml
   publish:
-    name: Publish
+    name: Publish package to GitHub
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -18,10 +16,6 @@ jobs:
         with:
           node-version: lts/*
           registry-url: 'https://npm.pkg.github.com'
-      - name: Download build
-        uses: actions/download-artifact@v4
-        with:
-          name: mpg-calc-build
       - name: Publish to package registry
         run: npm publish
         env:
