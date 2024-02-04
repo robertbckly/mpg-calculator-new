@@ -6,6 +6,8 @@ jobs:
   build:
     name: Build
     uses: ./.github/workflows/build.yml
+    with:
+      build-command: build-site
   publish:
     name: Publish package to GitHub
     needs: build
