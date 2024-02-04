@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.8](https://github.com/robertbckly/mpg-calculator-new/compare/v1.0.7...v1.0.8) (2024-02-04)
+
+
+### Miscellaneous Chores
+
+* bump version ([70b210d](https://github.com/robertbckly/mpg-calculator-new/commit/70b210d9dcc59215b0da8da02d9dab73154222fc))
+
 ## 1.0.7 (2024-02-04)
 
 
