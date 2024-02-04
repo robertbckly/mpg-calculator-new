@@ -3,8 +3,13 @@ name: Create package
 on: workflow_dispatch
 
 jobs:
-  build-and-publish:
-    name: Build and publish package
+  build:
+    name: Build
+    uses: ./.github/workflows/build.yml
+    with:
+      build-command: build-site
+  publish:
+    name: Publish package
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -12,9 +17,8 @@ jobs:
         with:
           node-version: lts/*
           registry-url: 'https://npm.pkg.github.com'
-      - uses: robertbckly/mpg-calculator-new/.github/workflows/build.yml@main
-        with:
-          build-command: build-site
+      - uses: actions/download-artifact@v4
+      - run: unzip mpg-calc-build
       - name: Publish to package registry
         run: npm publish
         env:
