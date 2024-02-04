@@ -19,8 +19,9 @@ jobs:
           node-version: lts/*
           registry-url: 'https://npm.pkg.github.com'
       - uses: actions/download-artifact@v4
-      - run: ls -la ./mpg-calc-build
+        with:
+          path: dist
       - name: Publish to package registry
-        run: npm publish ./mpg-calc-build/dist
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
