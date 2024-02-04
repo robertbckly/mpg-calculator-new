@@ -12,7 +12,7 @@ jobs:
         with:
           node-version: lts/*
           registry-url: 'https://npm.pkg.github.com'
-      - uses: /.github/workflows/build.yml
+      - uses: robertbckly/mpg-calculator-new/.github/workflows/build.yml@main
         with:
           build-command: build-site
       - name: Publish to package registry
