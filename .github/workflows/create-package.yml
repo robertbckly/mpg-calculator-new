@@ -19,7 +19,7 @@ jobs:
           node-version: lts/*
           registry-url: 'https://npm.pkg.github.com'
       - uses: actions/download-artifact@v4
-      # - run: unzip mpg-calc-build
+      - run: ls -la
       - name: Publish to package registry
         run: npm publish
         env:
