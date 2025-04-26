@@ -54,6 +54,8 @@ export function HelpDialog({ onClose }: HelpDialogProps) {
         can&apos;t be accessed between devices.
       </p>
 
+      <p>This paragraph was added to test the CD pipeline.</p>
+
       <br />
 
       <DialogActions confirmButtonText="Close" onConfirm={onClose} />
