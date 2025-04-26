@@ -15,7 +15,6 @@ import './app.css';
 
 /**
  * -- TODO --
- * -> Improve deploy process (GitHub Actions)
  * -> Move form to non-controlled inputs, using FormData API ?
  * --      --
  */
