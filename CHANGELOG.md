@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/robertbckly/mpg-calculator-new/compare/v1.0.10...v1.1.0) (2025-04-26)
+
+
+### Features
+
+* add ui change to test deploy pipeline ([5757757](https://github.com/robertbckly/mpg-calculator-new/commit/5757757c316a2be87d3912a665072e00e8da2fbf))
+
 ## [1.0.10](https://github.com/robertbckly/mpg-calculator-new/compare/v1.0.9...v1.0.10) (2025-04-26)
 
 
