@@ -32,5 +32,7 @@ jobs:
     name: Deploy to Cloudflare
     needs: publish-package
     uses: ./.github/workflows/deploy-to-cloudflare.yml
+    secrets:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     # Only deploy upon merge of new release
     if: ${{ needs.release-please.outputs.release_created }}
