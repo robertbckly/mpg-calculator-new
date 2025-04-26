@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.10](https://github.com/robertbckly/mpg-calculator-new/compare/v1.0.9...v1.0.10) (2025-04-26)
+
+
+### Bug Fixes
+
+* empty test commit ([d05ead8](https://github.com/robertbckly/mpg-calculator-new/commit/d05ead82c1e29a5fb83d270c8b2bd4ca37892c9f))
+
 ## [1.0.9](https://github.com/robertbckly/mpg-calculator-new/compare/v1.0.8...v1.0.9) (2025-04-26)
 
 
